@@ -1,70 +1,156 @@
 import threading
+
 import sys
+
 import os
+
 import glob
+
 from pathlib import Path
 
 
 
+
+
+def checkstart(name):
+
+    x = glob.glob(name)
+
+    return x
+
+
+
+
+
+def deletefile(filename):
+
+    filepath = Path(filename)
+
+    if(os.path.isfile(filename) and os.access(filepath, os.R_OK)):
+
+        actualPath = filepath.resolve()
+
+        os.remove(actualPath)
+
+    elif(os.path.isdir(filename)):
+
+        print('cannot remove {}  directory'.format(filename))
+
+    else:
+
+        print('file {} does not exits'.format(filename))
+
+
+
+
+
+def deleteDir(directory):
+
+    p = Path(directory)
+
+    if(os.path.isdir(directory) and os.access(p, os.R_OK)):
+
+        currentdirectory = Path.cwd()
+
+        x = p.resolve()
+
+        os.chdir(x)
+
+        listd = os.listdir(x)
+
+        for filee in listd:
+
+            pathh = os.path.abspath(filee)
+
+            if(os.path.isfile(filee) and os.access(pathh, os.R_OK)):
+
+                os.remove(pathh)
+
+            elif(os.path.isdir(pathh) and os.access(pathh, os.R_OK)):
+
+                dir = os.listdir(pathh)
+
+                if(len(dir) == 0):
+
+                    os.rmdir(pathh)
+
+                else:
+
+                    print("contains a directory that is not empty")
+
+        dirlen = os.listdir(x)
+
+        if(len(dirlen) == 0):
+
+            os.rmdir(x)
+
+            print('directory: {0} has been removed'.format(directory))
+
+            os.chdir(currentdirectory)
+
+    else:
+
+        print("directory does not exist")
+
 def rm(**kwargs):
-	command = ['rm']
-	parameter =kwargs['params']
-	length = len(parameter)
-	if('-r' not in parameter and '*' not in parameter):
-		for filordir in parameter:
-			path = Path(filordir)
-			if(os.path.isfile(filordir) and os.access(path, os.R_OK)):
-				pathh = path.resolve()
-				os.remove(pathh)
-				print(' file: {} has been removed'.format(filordir))
-			elif(os.path.isdir(filordir) and os.access(path, os.R_OK)):
-				pathh = path.resolve()
-				dir =os.listdir(pathh)
-				if(len(dir) ==0):
-					os.rmdir(pathh)
-					print(' directory: {} has been removed'.format(filordir))
-				else:
-					print("directory not empty")
-			else:
-				print("file does not exisit")
-	elif(len(parameter) == 1 and '*' in parameter[0]):
-		wildcard = parameter[0]
-		dot = '.'
-		subWildcard ="".join(c for c in s if c.isalnum())
-		if ('*' in wildcard and '.'in wildcard):
-			subwildcard1 = dot + subwildcard
-			f = glob.glob(subwildcard1)
-			for filordir in f:
-				path = Path(subWildcard)
-				pathh = path.resolve()
-				if(os.path.isfile(filordir) and os.access(path, os.R_OK)):
-					os.remove(pathh)
-					print(' file: {} has been removed'.format(filordir))
-				elif(os.path.isdir(filordir) and os.access(path, os.R_OK)):
-					pathh = path.resolve()
-					dir =os.listdir(pathh)
-					if(len(dir) ==0):
-						os.rmdir(pathh)
-						print(' directory: {} has been removed'.format(filordir))
-					else:
-						print("directory not empty")
-				else:
-					print("file does not exisit")
-		elif('*' in wildcard and '.' not in wildcard ):
-			f = glob.glob(subwildcard)
-			for filordir in f:
-				path = Path(subWildcard)
-				pathh = path.resolve()
-				if(os.path.isfile(filordir) and os.access(path, os.R_OK)):
-					os.remove(pathh)
-					print(' file: {} has been removed'.format(filordir))
-				elif(os.path.isdir(filordir) and os.access(path, os.R_OK)):
-					pathh = path.resolve()
-					dir =os.listdir(pathh)
-					if(len(dir) ==0):
-						os.rmdir(pathh)
-						print(' directory: {} has been removed'.format(filordir))
-					else:
-						print("directory not empty")
-				else:
-					print("file does not exisit")
+
+    command = ['rm']
+
+    parameter = kwargs['params']
+
+    flag = kwargs['flags']
+
+    directions = kwargs['directions']
+
+    tag = kwargs['tag']
+
+    if(len(flag) == 0 and len(directions) == 0 and tag == False and len(parameter) > 0):
+
+        for filename in parameter:
+
+            if('*' in filename):
+
+                listoffiles = checkstart(filename)
+
+                for files in listoffiles:
+
+                    if(os.path.isfile(files)):
+
+                        deletefile(files)
+
+                    else:
+
+                        print('cannot delete a directory {}'.format(files))
+
+            else:
+
+                deletefile(filename)
+
+    elif(len(flag) == 1 and len(directions) == 0 and tag == False and len(parameter) > 0):
+
+        for directory in parameter:
+
+            if('*' in directory):
+
+                listoffiles = checkstart(directory)
+
+                for files in listoffiles:
+
+                    if(os.path.isfile(files)):
+
+                        deletefile(files)
+
+                    else:
+
+                        deleteDir(files)
+
+            else:
+
+                deleteDir(directory)
+
+    else:
+
+        print("not enough arguments")
+
+
+
