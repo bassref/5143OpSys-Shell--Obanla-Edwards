@@ -9,131 +9,70 @@ import glob
 from pathlib import Path
 
 
-
-
-
 def cp(**kwargs):
 
-	command = ['cp']
+    command = ['cp']
 
-	parameter =kwargs['params']
+    parameter = kwargs['params']
 
-	parameter =kwargs['params']
+    parameter = kwargs['params']
 
-	flag = kwargs['flags'] 
+    flag = kwargs['flags']
 
-	directions = kwargs['directions']  
+    directions = kwargs['directions']
 
-	tag = kwargs['tag']
+    tag = kwargs['tag']
 
-	if(len(parameter) ==2 and len(flag) == 0 and len(directions)== 0 and tag ==False):
+    if(len(parameter) == 2 and len(flag) == 0 and len(directions) == 0 and tag == False):
 
-		file1 = parameter[0]
+        file1 = parameter[0]
 
-		file2 = parameter[1]
+        file2 = parameter[1]
 
-		f1path = Path(file1)
+        f1path = Path(file1)
 
-		f2path = Path(file2)
+        f2path = Path(file2)
 
-		if (os.path.isfile(file1)):
+        if (os.path.isfile(file1)):
 
-			test1= os.path.isfile(file1)
+            test1 = os.path.isfile(file1)
 
-			test2 = os.path.isfile(file2)
+            test2 = os.path.isfile(file2)
 
-			permissionf1 = os.access(f1path, os.R_OK)
+            permissionf1 = os.access(f1path, os.R_OK)
 
-			permissionf2 = os.access(f2path, os.W_OK)
+            permissionf2 = os.access(f2path, os.W_OK)
 
-			if(permissionf1 == True):
+            if(permissionf1 == True):
 
-				try:
+                try:
 
-					f1 = open(file1,"r")
+                    f1 = open(file1, "r")
 
-					f2 = open(file2,"w")
+                    f2 = open(file2, "w")
 
-					for x in f1:
+                    for x in f1:
 
-						f2.write(x)
+                        f2.write(x)
 
-					f1.close()
+                    f1.close()
 
-					f2.close()
+                    f2.close()
 
-					print("copy complete")
+                    print("copy complete")
 
-				except IOError as error:
+                except IOError as error:
 
-					print(error)
+                    print(error)
 
-			else:
+            else:
 
-				print("insufficient permmision")
+                print("insufficient permmision")
 
-		else:
+        else:
 
-			
+            print("file does not exisit")
 
-			print("file does not exisit")
+    else:
 
-	else:
-
-		print("invalid arguments")
-
-		
-
-
-
-		
-
-
-
-	
-
-					
-
-			
-
-		
-
-		
-
-		
-
-		
-
-		
-
-		
-
-		
-
-		
-
-		
-
-		
-
-		
-
-		
-
-		
-
-		
-
-		
-
-		
-
-		
-
-		
-
-		
-
-		
-
-	
+        print("invalid arguments")

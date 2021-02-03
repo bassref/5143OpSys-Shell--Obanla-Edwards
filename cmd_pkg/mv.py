@@ -11,7 +11,7 @@ from pathlib import Path
 def mv(**kwargs):
 	command = ['mv']
 	parameter = kwargs['params']
-	parameter =kwargs['params']
+	
 	flag = kwargs['flags'] 
 	directions = kwargs['directions']  
 	tag = kwargs['tag']

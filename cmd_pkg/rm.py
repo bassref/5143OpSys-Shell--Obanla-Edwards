@@ -9,17 +9,11 @@ import glob
 from pathlib import Path
 
 
-
-
-
 def checkstart(name):
 
     x = glob.glob(name)
 
     return x
-
-
-
 
 
 def deletefile(filename):
@@ -39,9 +33,6 @@ def deletefile(filename):
     else:
 
         print('file {} does not exits'.format(filename))
-
-
-
 
 
 def deleteDir(directory):
@@ -91,6 +82,7 @@ def deleteDir(directory):
     else:
 
         print("directory does not exist")
+
 
 def rm(**kwargs):
 
@@ -151,6 +143,3 @@ def rm(**kwargs):
     else:
 
         print("not enough arguments")
-
-
-

@@ -5,167 +5,144 @@ import os
 from pathlib import Path
 
 
-
 def cd(**kwargs):
 
-	tag = kwargs['tag']
+    tag = kwargs['tag']
 
-	
+    if (tag == True):
 
-	if (tag == True):
+        cdwithtag(**kwargs)
 
-		
+    else:
 
-		cdwithtag(**kwargs)
-
-	else:
-
-		
-
-		cdwithouth(**kwargs)
-
-
-
+        cdwithouth(**kwargs)
 
 
 def cdwithtag(**kwargs):
 
-	command = ['cd']
+    command = ['cd']
 
-	parameter =kwargs['params']
+    parameter = kwargs['params']
 
-	flag = kwargs['flags'] 
+    flag = kwargs['flags']
 
-	directions = kwargs['directions']  
+    directions = kwargs['directions']
 
-	tag = kwargs['tag']
+    tag = kwargs['tag']
 
-	if(len(flag) == 0 and len(directions)== 0 and tag ==False and len(parameter) ==0):
+    if(len(flag) == 0 and len(directions) == 0 and tag == False and len(parameter) == 0):
 
-		home = str(Path.home())
+        home = str(Path.home())
 
-		return os.chdir(home)
+        return os.chdir(home)
 
-	elif(len(flag) == 0 and len(directions)== 0 and tag ==False and len(parameter) ==1):
+    elif(len(flag) == 0 and len(directions) == 0 and tag == False and len(parameter) == 1):
 
-		directory = parameter[0]
+        directory = parameter[0]
 
-		isdir = os.path.isdir(directory) 
+        isdir = os.path.isdir(directory)
 
-		if(isdir and os.access(directory, os.R_OK)):
+        if(isdir and os.access(directory, os.R_OK)):
 
-			return os.chdir(directory)
+            return os.chdir(directory)
 
-		else:
+        else:
 
-			print("no such file or directory")
+            print("no such file or directory")
 
-	elif(len(flag) == 1 and len(directions)== 0 and tag ==False and len(parameter) ==0):
+    elif(len(flag) == 1 and len(directions) == 0 and tag == False and len(parameter) == 0):
 
-		if(flag[0] =='..'):
+        if(flag[0] == '..'):
 
-			path = os.getcwd()
+            path = os.getcwd()
 
-			p=Path(path).parent
+            p = Path(path).parent
 
-			if(os.access(p ,os.R_OK)):
+            if(os.access(p, os.R_OK)):
 
-				return  os.chdir(p) 
+                return os.chdir(p)
 
-			else:
+            else:
 
-				print("permission denied")
+                print("permission denied")
 
-		elif(flag[0] =='~'):
+        elif(flag[0] == '~'):
 
-			home = str(Path.home())
+            home = str(Path.home())
 
-			return  os.chdir(home)
+            return os.chdir(home)
 
-	elif(len(flag) == 0 and len(directions)> 0 and tag ==False and len(parameter) ==1):
+    elif(len(flag) == 0 and len(directions) > 0 and tag == False and len(parameter) == 1):
 
-		home = str(Path.home())
+        home = str(Path.home())
 
-		return os.chdir(home)
+        return os.chdir(home)
 
-	else:
+    else:
 
-		print ("invalid parameters")
-
-		
-
-		
-
-			
-
-
-
+        print("invalid parameters")
 
 
 def cdwithouth(**kwargs):
 
-	command = ['cd']
+    command = ['cd']
 
-	parameter =kwargs['params']
+    parameter = kwargs['params']
 
-	flag = kwargs['flags'] 
+    flag = kwargs['flags']
 
-	directions = kwargs['directions']  
+    directions = kwargs['directions']
 
-	tag = kwargs['tag']
+    tag = kwargs['tag']
 
-	
+    if(len(flag) == 0 and len(directions) == 0 and tag == False and len(parameter) == 0):
 
-	if(len(flag) == 0 and len(directions)== 0 and tag ==False and len(parameter) ==0):
+        home = str(Path.home())
 
-		home = str(Path.home())
+        os.chdir(home)
 
-		os.chdir(home)
+    elif(len(flag) == 0 and len(directions) == 0 and tag == False and len(parameter) == 1):
 
-	elif(len(flag) == 0 and len(directions)== 0 and tag ==False and len(parameter) ==1):
+        directory = parameter[0]
 
-		directory = parameter[0]
+        isdir = os.path.isdir(directory)
 
-		isdir = os.path.isdir(directory) 
+        if(isdir and os.access(directory, os.R_OK)):
 
-		if(isdir and os.access(directory, os.R_OK)):
+            os.chdir(directory)
 
-			os.chdir(directory)
+        else:
 
-		else:
+            print("no such file or directory")
 
-			print("no such file or directory")
+    elif(len(flag) == 1 and len(directions) == 0 and tag == False and len(parameter) == 0):
 
-	elif(len(flag) == 1 and len(directions)== 0 and tag ==False and len(parameter) ==0):
+        if(flag[0] == '..'):
 
-		if(flag[0] =='..'):
+            path = os.getcwd()
 
-			path = os.getcwd()
+            p = Path(path).parent
 
-			p=Path(path).parent
+            if(os.access(p, os.R_OK)):
 
-			if(os.access(p ,os.R_OK)):
+                os.chdir(p)
 
-				os.chdir(p) 
+            else:
 
-			else:
+                print("permission denied")
 
-				print("permission denied")
+        elif(flag[0] == '~'):
 
-		elif(flag[0] =='~'):
+            home = str(Path.home())
 
-			home = str(Path.home())
+            os.chdir(home)
 
-			os.chdir(home)
+    elif(len(flag) == 0 and len(directions) > 0 and tag == False and len(parameter) == 1):
 
-	elif(len(flag) == 0 and len(directions)> 0 and tag ==False and len(parameter) ==1):
+        home = str(Path.home())
 
-		home = str(Path.home())
+        os.chdir(home)
 
-		os.chdir(home)
+    else:
 
-	else:
-
-		print ("invalid parameters")
-
-	
+        print("invalid parameters")

@@ -1,72 +1,152 @@
 import threading
 
+
 import sys
+
 
 import os
 
+
 import glob
+
 
 import stat
 
+
 from time import gmtime, strftime
 
+
 import time
+
 
 from pathlib import Path
 
 
+import ntpath
 
 
+def path_leaf(path):
+
+    head, tail = ntpath.split(path)
+
+    return tail or ntpath.basename(head)
 
 
+def lslong(filename, islsah):
 
-def lslong (filename):
-
-    listanswer =[]
-
-    answer =""
+    answer = ""
 
     permission = {
 
-        '0':"---",
 
-        '1':"--x",
 
-        '2':"-w-",
 
-        '3':"-wx",
 
-        '4':"r--",
 
-        '5':"r-x",
 
-        '6':"r-w",
+        '0': "---",
 
-        '7':"rwx"}
+
+
+
+
+
+
+        '1': "--x",
+
+
+
+
+
+
+
+        '2': "-w-",
+
+
+
+
+
+
+
+        '3': "-wx",
+
+
+
+
+
+
+
+        '4': "r--",
+
+
+
+
+
+
+
+        '5': "r-x",
+
+
+
+
+
+
+
+        '6': "r-w",
+
+
+
+
+
+
+
+        '7': "rwx"}
 
     filepath = Path(filename)
 
-    actualPath = filepath.resolve()
+    fp = os.path.abspath(filename)
+
+    actualPath = os.path.dirname(os.path.abspath(filename))
+
+    name = path_leaf(actualPath)
 
     if(os.path.isfile(filename)):
 
-	    answer= answer + "-"
+        answer = answer + "-"
 
     elif(os.path.isdir(filename)):
 
-	    answer= answer + 'd'
+        answer = answer + 'd'
 
-    st = os.stat(filepath)
+    st = os.stat(fp)
 
     t = st.st_mtime
 
+    if(islsah == True):
+
+        size = st.st_size
+
+    else:
+
+        size = st.st_size
+
+        if(size >= 1024 and size <= 1000000):
+
+            size = size/1000
+
+            size = (str(size)[:3])
+
+            size = size + "K"
+
     now = int(time.time())
 
-    recent = now - (6*30*24*60*60) #4 months ago
+    recent = now - (6*30*24*60*60)  # 6 months ago
 
-    if(t<recent) or (t> now):
+    if(t < recent) or (t > now):
 
-	    time_fmt = "%b %e %Y"
+        time_fmt = "%b %e %Y"
+
+        time_str = time.strftime(time_fmt, time.gmtime(t))
 
     else:
 
@@ -76,122 +156,193 @@ def lslong (filename):
 
     allpermission = oct(st.st_mode)[-3:]
 
-   
-
     for item in allpermission:
 
-        answer =answer + "".join(permission[item])
-
-    answer= answer + " "
-
-    numoflinks = str(st.st_nlink)
-
-    answer = answer+ numoflinks
+        answer = answer + "".join(permission[item])
 
     answer = answer + " "
 
-    if actualPath.exists():
+    numoflinks = str(st.st_nlink)
 
-        answer = answer + actualPath.owner()
+    answer = answer + numoflinks
 
-        answer= answer + " "
+    answer = answer + " "
 
-        answer = answer + actualPath.group()
+    if filepath.exists():
 
-        answer= answer + " "
+        answer = answer + filepath.owner()
 
-    answer = answer + str(st.st_size)
+        answer = answer + " "
 
-    answer= answer + " "
+        answer = answer + filepath.group()
+
+        answer = answer + " "
+
+    answer = answer + str(size)
+
+    answer = answer + " "
 
     answer = answer + time_str
 
+    answer = answer + " "
+
+    answer = answer + filename
+
     return answer
 
-        
 
 def lsh(filename):
 
-    filepath = Path(filename)
+    actualPath = os.getcwd()
 
-    actualPath = filepath.resolve()
+    listed = os.listdir(actualPath)
 
-    print(actualPath)
+    return(listed)
 
-    l = os.listdir(actualPath)
-
-    return(l)
 
 def myFunc(e):
 
-  return len(e)
-
+    return len(e)
 
 
 def lsa(filename):
 
-	z = glob.glob('.?*')
+    z = glob.glob('.?*')
 
-	filepath = Path(filename)
+    filepath = Path(filename)
 
-	actualPath = filepath.resolve()
+    actualPath = os.path.dirname(os.path.abspath(filename))
 
-	l = os.listdir(actualPath)
+    l = glob.glob(os.path.join(actualPath, '*'))
 
-	l.extend(z)
+    for i in range(len(l)):
 
-	l = list(set(l))
+        l[i] = path_leaf(l[i])
 
-	l.sort(reverse = True ,key =myFunc)
+    l.extend(z)
 
-	return (l)
+    l = list(set(l))
 
-	
+    l.sort(reverse=True, key=myFunc)
 
-    	
+    return (l)
+
 
 def printlist(l):
 
-	
+    for i in range(len(l)//3+1):
 
-	for i in range(len(l)//3+1):
+        print("\t " .join(l[i*3:(i+1)*3]) + "\n")
 
-    		print( "\t " .join(l[i*3:(i+1)*3]) + "\n")
-
-
-
-		
 
 def ls(**kwargs):
 
-	
+    command = ['ls']
 
-	command = ['ls']
+    parameter = kwargs["params"]
 
-	parameter= kwargs["params"]
+    flag = kwargs['flags']
 
-	flag = kwargs['flags']
+    directions = kwargs['directions']
 
-	directions = kwargs['directions']
+    tag = kwargs['tag']
 
-	tag = kwargs['tag']
+    actualPath = os.getcwd()
 
-	
+    filename = path_leaf(actualPath)
 
-	if(len(flag) == 0 and len(directions) == 0 and tag == False and len(parameter) == 0):
+    l = glob.glob(os.path.join(actualPath, '*'))
 
-		actualPath = os.getcwd()
+    if(len(flag) == 0 and len(directions) == 0 and tag == False and len(parameter) == 0):
 
-		
+        listed = os.listdir(actualPath)
 
-		l = os.listdir(actualPath)
+        printlist(listed)
 
-		printlist(l)
+    elif(len(flag) == 1 and len(directions) == 0 and tag == False and len(parameter) == 0):
 
-		
+        longlist = []
 
-		
+        for fl in flag:
 
-	
+            if(fl == '-l'):
 
-	
+                for files in l:
+
+                    name = path_leaf(files)
+
+                    val = lslong(name, True)
+
+                    longlist.append(val)
+
+                for item in longlist:
+
+                    print(item)
+
+            elif(fl == '-a'):
+
+                val = lsa(filename)
+
+                printlist(val)
+
+            elif(fl == '-h'):
+
+                val = lsh(filename)
+
+                printlist(val)
+
+            else:
+
+                print("invalid parameter")
+
+    elif(len(flag) == 2 and len(directions) == 0 and tag == False and len(parameter) == 0):
+
+        longlsit = []
+
+        if('-l' in flag and '-a' in flag):
+
+            alla = lsa(filename)
+
+            for file in alla:
+
+                path = Path(file)
+
+                pathh = path.resolve()
+
+                filename2 = path_leaf(pathh)
+
+                lsl = lslong(filename2, True)
+
+                longlsit.append(lsl)
+
+            for item in longlsit:
+
+                print(item)
+
+        elif('-a' in flag and '-h' in flag):
+
+            val = lsh(filename)
+
+            printlist(val)
+
+        elif('-h' in flag and '-l' in flag):
+
+            for files in l:
+
+                name = path_leaf(files)
+
+                val = lslong(name, False)
+
+                longlsit.append(val)
+
+            for item in longlsit:
+
+                print(item)
+
+        else:
+
+            print("invalid flags")
+
+    else:
+
+        print("invalid command")

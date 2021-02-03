@@ -7,12 +7,11 @@ from pathlib import Path
  #If the parameters are just files, print them on the screen
 def cat(**kwargs):
 	command = ['cat']
-	parameter = kwargs['params']
-	parameter =kwargs['params']
+	params = kwargs['params']
 	flag = kwargs['flags'] 
 	directions = kwargs['directions']  
 	tag = kwargs['tag']
-	length = len(parameter)
+	length = len(params)
 	filecount = 0
 	for p in params:
 		with open(params[filecount], "r") as f:

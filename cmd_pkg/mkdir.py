@@ -9,51 +9,50 @@ import glob
 from pathlib import Path
 
 
-
 def mkdir(**kwargs):
 
-	command = ['mkdir']
+    command = ['mkdir']
 
-	parameter =kwargs['params']
+    parameter = kwargs['params']
 
-	flag = kwargs['flags'] 
+    flag = kwargs['flags']
 
-	directions = kwargs['directions']  
+    directions = kwargs['directions']
 
-	tag = kwargs['tag']
+    tag = kwargs['tag']
 
-	path = os.getcwd()
+    path = os.getcwd()
 
-	length = len(parameter)
+    length = len(parameter)
 
-	if(len(flag) == 0 and len(directions)== 0 and tag ==False and len(parameter) ==0):
+    if(len(flag) == 0 and len(directions) == 0 and tag == False and len(parameter) == 0):
 
-		print("enter a directory name")
+        print("enter a directory name")
 
-	elif(len(flag) == 0 and len(directions)== 0 and tag ==False and len(parameter) >1):
+    elif(len(flag) == 0 and len(directions) == 0 and tag == False and len(parameter) > 1):
 
-		for directoryName in parameter:
+        for directoryName in parameter:
 
-			isdir = os.path.isdir(directoryName) 
+            isdir = os.path.isdir(directoryName)
 
-			permission = os.access(path, os.W_OK)
+            permission = os.access(path, os.W_OK)
 
-			newdirectory =os.path.join(path, directoryName)
+            newdirectory = os.path.join(path, directoryName)
 
-			if(isdir == False and permission == True):
+            if(isdir == False and permission == True):
 
-				try:
+                try:
 
-					os.mkdir(newdirectory) 
+                    os.mkdir(newdirectory)
 
-				except OSError as error:  
+                except OSError as error:
 
-	    				print(error) 
+                    print(error)
 
-			elif(isdir == True):
+            elif(isdir == True):
 
-				print('{} already Exist'.format(directoryName))
+                print('{} already Exist'.format(directoryName))
 
-			elif(permission == False):
+            elif(permission == False):
 
-				print("No write permission in current directory")
+                print("No write permission in current directory")
