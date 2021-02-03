@@ -1,10 +1,14 @@
 import threading
 
+
 import sys
+
 
 import os
 
+
 import glob
+
 
 from pathlib import Path
 
@@ -25,11 +29,15 @@ def mkdir(**kwargs):
 
     length = len(parameter)
 
+    answer = ""
+
     if(len(flag) == 0 and len(directions) == 0 and tag == False and len(parameter) == 0):
 
-        print("enter a directory name")
+        answer = answer + "enter a directory name"
 
-    elif(len(flag) == 0 and len(directions) == 0 and tag == False and len(parameter) > 1):
+        return answer
+
+    elif(len(flag) == 0 and len(directions) == 0 and tag == False and len(parameter) >= 1):
 
         for directoryName in parameter:
 
@@ -47,12 +55,18 @@ def mkdir(**kwargs):
 
                 except OSError as error:
 
-                    print(error)
+                    answer = error
+
+                    return answer
 
             elif(isdir == True):
 
-                print('{} already Exist'.format(directoryName))
+                answer = answer + '{} already Exist'.format(directoryName)
+
+                return answer
 
             elif(permission == False):
 
-                print("No write permission in current directory")
+                answer = answer + "No write permission in current directory"
+
+                return answer

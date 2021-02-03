@@ -3,7 +3,7 @@ import os
 
 
 def wc(**kwargs):
-    command = ['rm']
+    command = ['wc']
     parameter = kwargs['params']
     flag = kwargs['flags']
     directions = kwargs['directions']
@@ -17,8 +17,13 @@ def wc(**kwargs):
     wflag = False
     aflag = False
     el = False
-    if(len(flag) >= 0 and len(directions) == 0 and tag == False and len(parameter) > 0):
+    
+    
+    
+    answer = ""
+    if(len(flag) >= 0 and len(parameter) > 0):
         for fname in parameter:
+            
             if (os.path.isfile(fname)):
                 listed = {}
                 num_lines = 0
@@ -38,54 +43,92 @@ def wc(**kwargs):
                 listed['num_words'] = num_words
                 listed['num_chars'] = num_chars
                 lsitall.append(listed)
+               
             else:
                 el = True
-                print("{} , is not a file".format(fname))
-                print("0  0  0")
+                answer = answer + "{} , is not a file".format(fname)
+                answer = answer + "0  0  0"
+                
+                return answer
 
         if(len(parameter) > 1 and el == False):
+           
             for item in lsitall:
                 key = item['fname']
                 if(len(flag) == 1):
                     aflag = True
                     if(flag[0] == '-l'):
                         lflag = True
-                        print("{} {}".format(item['num_lines'], key))
-
+                        answer = answer + "{} {}".format(item['num_lines'], key)
+                        answer = answer + "\n"
                     elif(flag[0] == '-m'):
                         mflag = True
-                        print("{} {}".format(item['num_chars'], key))
+                        answer = answer +  "{} {}".format(item['num_chars'], key)
+                        answer = answer + "\n"
 
                     elif(flag[0] == '-w'):
                         wflag = True
-                        print("{} {}".format(item['num_words'], key))
+                        answer = answer +  "{} {}".format(item['num_words'], key)
+                        answer = answer + "\n"
                     else:
-                        print("invalid arg")
+                        answer = answer + "invalid arg"
+
                 if(aflag == False):
-                    print("{} {} {} {}".format(
-                        item['num_lines'], item['num_words'], item['num_chars'], item['fname']))
+                    answer = answer + "{} {} {} {}".format(
+                        item['num_lines'], item['num_words'], item['num_chars'], item['fname'])
+                    answer = answer + "\n"
+                
             if(aflag == False):
-                print("{} {} {} Total ".format(
-                    total_lines, total_words, total_char))
+               
+                answer = answer + "{} {} {} Total ".format(
+                    total_lines, total_words, total_char)
+                answer = answer + "\n"
             if(lflag == True):
-                print(" {} Total ".format(total_lines))
+                answer = answer + " {} Total ".format(total_lines)
+                answer = answer + "\n"
             elif(mflag == True):
-                print("{} Total ".format(total_char))
+                answer = answer + "{} Total ".format(total_char)
+                answer = answer + "\n"
             elif(wflag == True):
-                print("{} Total ".format(total_words))
+                answer = answer + "{} Total ".format(total_words)
+                answer = answer + "\n"
+            
+            if(len(directions) == 2):
+                
+                direct=directions[0]
+                file=directions[1]
+                f=open(file, direct)
+                f.write(answer)
+                f.close()
+            else:
+                         
+                return answer
         elif(len(parameter) == 1 and el == False):
             fname = parameter[0]
             dic1 = lsitall[0]
             if(len(flag) == 1):
                 if(flag[0] == '-l'):
-                    print("{} {}".format(dic1['num_lines'], fname))
+                    answer = answer + "{} {}".format(dic1['num_lines'], fname)
+                    answer = answer + "\n"
                 elif(flag[0] == '-m'):
-                    print("{} {}".format(dic1['num_chars'], fname))
+                    answer = answer + "{} {}".format(dic1['num_chars'], fname)
+                    answer = answer + "\n"
                 elif(flag[0] == '-w'):
-                    print("{} {}".format(dic1['num_words'], fname))
+                    answer = answer + "{} {}".format(dic1['num_words'], fname)
+                    answer = answer + "\n"
                 else:
-                    print("invalid arg")
+                    answer = answer + "invalid arg"
+            
             else:
                 lis = list(dic1.values())
 
-                print("{} {} {}".format(lis[1], lis[2], lis[3], lis[0]))
+                answer = answer + "{} {} {}".format(lis[1], lis[2], lis[3], lis[0])
+                answer = answer + "\n"
+            if(len(directions) == 2):
+                direct=directions[0]
+                file=directions[1]
+                f=open(file, direct)
+                f.write(answer)
+                f.close()
+            else:          
+                return answer

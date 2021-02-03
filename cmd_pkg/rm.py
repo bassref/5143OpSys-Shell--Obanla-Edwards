@@ -17,7 +17,7 @@ def checkstart(name):
 
 
 def deletefile(filename):
-
+    answer = ""
     filepath = Path(filename)
 
     if(os.path.isfile(filename) and os.access(filepath, os.R_OK)):
@@ -28,16 +28,19 @@ def deletefile(filename):
 
     elif(os.path.isdir(filename)):
 
-        print('cannot remove {}  directory'.format(filename))
+        answer = answer + 'cannot remove {}  directory'.format(filename)
+        return answer
 
     else:
-
-        print('file {} does not exits'.format(filename))
+         
+        answer = answer + 'file {} does not exits'.format(filename)
+        return answer
 
 
 def deleteDir(directory):
 
     p = Path(directory)
+    answer = ""
 
     if(os.path.isdir(directory) and os.access(p, os.R_OK)):
 
@@ -67,7 +70,8 @@ def deleteDir(directory):
 
                 else:
 
-                    print("contains a directory that is not empty")
+                    answer = answer + "contains a directory that is not empty"
+                    return answer
 
         dirlen = os.listdir(x)
 
@@ -75,13 +79,12 @@ def deleteDir(directory):
 
             os.rmdir(x)
 
-            print('directory: {0} has been removed'.format(directory))
-
             os.chdir(currentdirectory)
 
     else:
 
-        print("directory does not exist")
+        answer = answer + "directory does not exist"
+        return answer
 
 
 def rm(**kwargs):
@@ -95,6 +98,7 @@ def rm(**kwargs):
     directions = kwargs['directions']
 
     tag = kwargs['tag']
+    answer = ""
 
     if(len(flag) == 0 and len(directions) == 0 and tag == False and len(parameter) > 0):
 
@@ -112,7 +116,8 @@ def rm(**kwargs):
 
                     else:
 
-                        print('cannot delete a directory {}'.format(files))
+                        answer = answer + 'cannot delete a directory {}'.format(files)
+                        return answer
 
             else:
 
@@ -142,4 +147,5 @@ def rm(**kwargs):
 
     else:
 
-        print("not enough arguments")
+        answer = answer + "not enough arguments"
+        return answer

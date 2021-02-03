@@ -21,17 +21,21 @@ def doflen(name):
 
 
 def deleteDir(directory):
+	
     p = Path(directory)
+    answer =""
     pathh = os.path.abspath(directory)
     if(os.path.isdir(pathh) and os.access(pathh, os.R_OK)):
         currentdirectory = Path.cwd()
         dirlen = os.listdir(pathh)
         if(len(dirlen) == 0):
             os.rmdir(pathh)
-            print('directory: {0} has been removed'.format(directory))
+            answer =answer + 'directory: {0} has been removed'.format(directory)
+            return answer
 
     else:
-        print("directory does not exist")
+        answer =answer +"directory does not exist"
+        return answer
 
 
 def rmdir(**kwargs):
@@ -40,6 +44,7 @@ def rmdir(**kwargs):
     flag = kwargs['flags']
     directions = kwargs['directions']
     tag = kwargs['tag']
+    answer =""
     if(len(flag) == 0 and len(directions) == 0 and tag == False and len(parameter) > 0):
         for directory in parameter:
             p = Path(directory)
@@ -53,9 +58,12 @@ def rmdir(**kwargs):
                         if(length == True):
                             deleteDir(direct)
                         else:
-                            print("{} not empty".format(direct))
+                            answer =answer + "{} not empty".format(direct)
+                            return answer
+                            
                     else:
-                        print("{} cannot delete file".format(direct))
+                        answer =answer + "{} cannot delete file".format(direct)
+                        return answer
 
             else:
                 length = doflen(directory)
@@ -63,6 +71,8 @@ def rmdir(**kwargs):
                     if(length == True):
                         deleteDir(directory)
                 else:
-                    print("{} cannot delete file".format(directory))
+                     answer =answer +"{} cannot delete file".format(directory)
+                     return answer
     else:
-        print("not enough arguments")
+         answer =answer +"not enough arguments"
+         return answer

@@ -1,26 +1,18 @@
 import threading
 
-
 import sys
-
 
 import os
 
-
 import glob
-
 
 import stat
 
-
 from time import gmtime, strftime
-
 
 import time
 
-
 from pathlib import Path
-
 
 import ntpath
 
@@ -38,67 +30,19 @@ def lslong(filename, islsah):
 
     permission = {
 
-
-
-
-
-
-
         '0': "---",
-
-
-
-
-
-
 
         '1': "--x",
 
-
-
-
-
-
-
         '2': "-w-",
-
-
-
-
-
-
 
         '3': "-wx",
 
-
-
-
-
-
-
         '4': "r--",
-
-
-
-
-
-
 
         '5': "r-x",
 
-
-
-
-
-
-
         '6': "r-w",
-
-
-
-
-
-
 
         '7': "rwx"}
 
@@ -230,9 +174,12 @@ def lsa(filename):
 
 def printlist(l):
 
+    answer = ""
+
     for i in range(len(l)//3+1):
 
-        print("\t " .join(l[i*3:(i+1)*3]) + "\n")
+        answer = answer + "\t " .join(l[i*3:(i+1)*3]) + "\n"
+        return answer
 
 
 def ls(**kwargs):
@@ -252,14 +199,16 @@ def ls(**kwargs):
     filename = path_leaf(actualPath)
 
     l = glob.glob(os.path.join(actualPath, '*'))
+    answer = ""
 
-    if(len(flag) == 0 and len(directions) == 0 and tag == False and len(parameter) == 0):
+    if(len(flag) == 0 and len(parameter) == 0):
 
         listed = os.listdir(actualPath)
 
-        printlist(listed)
+        answer = printlist(listed)
+        return answer
 
-    elif(len(flag) == 1 and len(directions) == 0 and tag == False and len(parameter) == 0):
+    elif(len(flag) == 1 and len(parameter) == 0):
 
         longlist = []
 
@@ -276,26 +225,50 @@ def ls(**kwargs):
                     longlist.append(val)
 
                 for item in longlist:
-
-                    print(item)
+                    answer = answer + item
+                    answer = answer + "\n"
+                if(len(directions) == 2):
+                    direct = directions[0]
+                    file = directions[1]
+                    f = open(file, direct)
+                    f.write(answer)
+                    f.close()
+                else:
+                    return answer
 
             elif(fl == '-a'):
 
                 val = lsa(filename)
 
-                printlist(val)
+                answer = printlist(val)
+                if(len(directions) == 2):
+                    direct = directions[0]
+                    file = directions[1]
+                    f = open(file, direct)
+                    f.write(answer)
+                    f.close()
+                else:
+                    return answer
 
             elif(fl == '-h'):
 
                 val = lsh(filename)
-
-                printlist(val)
+                answer = printlist(val)
+                if(len(directions) == 2):
+                    direct = directions[0]
+                    file = directions[1]
+                    f = open(file, direct)
+                    f.write(answer)
+                    f.close()
+                else:
+                    return answer
 
             else:
 
-                print("invalid parameter")
+                answer = "invalid parameter"
+                return answer
 
-    elif(len(flag) == 2 and len(directions) == 0 and tag == False and len(parameter) == 0):
+    elif(len(flag) == 2 and len(parameter) == 0):
 
         longlsit = []
 
@@ -316,14 +289,30 @@ def ls(**kwargs):
                 longlsit.append(lsl)
 
             for item in longlsit:
-
-                print(item)
+                answer = answer + item
+                answer = answer + "\n"
+            if(len(directions) == 2):
+                direct = directions[0]
+                file = directions[1]
+                f = open(file, direct)
+                f.write(answer)
+                f.close()
+            else:
+                return answer
 
         elif('-a' in flag and '-h' in flag):
 
             val = lsh(filename)
 
-            printlist(val)
+            answer = printlist(val)
+            if(len(directions) == 2):
+                direct = directions[0]
+                file = directions[1]
+                f = open(file, direct)
+                f.write(answer)
+                f.close()
+            else:
+                return answer
 
         elif('-h' in flag and '-l' in flag):
 
@@ -336,13 +325,23 @@ def ls(**kwargs):
                 longlsit.append(val)
 
             for item in longlsit:
-
-                print(item)
+                answer = answer + item
+                answer = answer + "\n"
+            if(len(directions) == 2):
+                direct = directions[0]
+                file = directions[1]
+                f = open(file, direct)
+                f.write(answer)
+                f.close()
+            else:
+                return answer
 
         else:
 
-            print("invalid flags")
+            answer = "invalid flags"
+            return answer
 
     else:
 
-        print("invalid command")
+        answer = "invalid command"
+        return answer
