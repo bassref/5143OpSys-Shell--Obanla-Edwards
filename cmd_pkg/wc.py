@@ -114,10 +114,10 @@ def wc(**kwargs):
             if(len(directions) == 2):
 
                 direct = directions[0]
-                file = directions[1]
-                f = open(file, direct)
-                f.write(answer)
-                f.close()
+                fil = directions[1]
+                with open(fil, direct) as f:
+                    f.write(answer)
+                
             else:
 
                 return answer
@@ -144,9 +144,9 @@ def wc(**kwargs):
                 answer = answer + "\n"
             if(len(directions) == 2):
                 direct = directions[0]
-                file = directions[1]
-                f = open(file, direct)
-                f.write(answer)
-                f.close()
+                fil = directions[1]
+                with open(fil, direct) as f:
+                    f.write(answer)
+                
             else:
                 return answer

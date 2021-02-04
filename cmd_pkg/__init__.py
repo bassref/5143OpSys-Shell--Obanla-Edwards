@@ -24,3 +24,6 @@ from cmd_pkg.mv import mv
 from cmd_pkg.wc import wc
 
 from cmd_pkg.grep import grep
+
+from cmd_pkg.history import history
+from cmd_pkg.findhistory import findhistory

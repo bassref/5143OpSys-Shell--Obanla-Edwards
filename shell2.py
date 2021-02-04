@@ -41,6 +41,8 @@ class CommandHelper(object):
         self.commands['wc'] = cp.wc
 
         self.commands['grep'] = cp.grep
+        self.commands['history'] = cp.history
+        self.commands['findhistory'] = cp.findhistory
 
         self.possibleflag = par.flag()
 
@@ -204,13 +206,25 @@ if __name__ == '__main__':
 
     while True:
 
-        # get input from terminal (use input if raw_input doesn't work)
-
+        basepath = os.path.dirname(__file__)
+        filepath = os.path.abspath(os.path.join(basepath, "history.log"))
         path = os.getcwd() + '>>'
 
         command_input = input(path)
+        while len(command_input.rstrip()) < 1:  # Check for empty lines
+            print("Error: no command entered")
+            command_input = input(">>")
 
-        # remove command from params (very over simplified)
+        cmdTest = command_input.split()[0]
+        if '!' in cmdTest:
+            testhist = cmdTest[1:]
+            if(str.isdigit(testhist)):
+                command_input = cp.findhistory(testhist)
+            else:
+                print('invalid entry')
+
+        with open(filepath, "a+") as log:
+            log.write(f"{command_input}\n")
 
         tag = False
 
@@ -231,8 +245,6 @@ if __name__ == '__main__':
                 params = split2[1:]
 
                 if(i != length - 1):
-
-                    
 
                     if ch.exists(cmd):
 

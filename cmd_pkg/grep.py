@@ -20,11 +20,11 @@ def grep(**kwargs):
             dic={}
             listlines=[]
             if(os.path.isfile(f)):
-                fil=open(f, 'r')
-                for lines in fil:
-                    if(keyword in lines):
-                        lines=lines.strip('\n')
-                        listlines.append(lines)
+                with open(f, 'r') as fil:
+                    for lines in fil:
+                        if(keyword in lines):
+                            lines=lines.strip('\n')
+                            listlines.append(lines)
                 dic[f]=listlines
                 allLines.append(dic)
             else:
@@ -44,9 +44,9 @@ def grep(**kwargs):
             elif(len(directions) == 2):
                 direct=directions[0]
                 file=directions[1]
-                f=open(file, direct)
-                f.write(key)
-                f.close()
+                with open(file, direct) as f:
+                    f.write(key)
+                
         return answer
     else:
         count=0
@@ -79,9 +79,9 @@ def grep(**kwargs):
                         for lis in x:
                            answer=answer + "{} : {}".format(key, lis)
                            answer=answer + "\n"
-                    f=open(file, direct)
-                    f.write(answer)
-                    f.close()
+                    with open(file, direct) as f:
+                        f.write(answer)
+                   
 
                 else:
                     for ans in allLines:
@@ -90,7 +90,7 @@ def grep(**kwargs):
                             for y in x:
                                 answer=answer + y
                                 answer=answer + "\n"
-                    f=open(file, direct)
-                    f.write(answer)
-                    f.close()
+                    with open(file, direct) as f:
+                        f.write(answer)
+                    
         return answer
