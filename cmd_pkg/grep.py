@@ -8,18 +8,16 @@ def grep(**kwargs):
     flag = kwargs['flags']
     directions = kwargs['directions']
     tag = kwargs['tag']
-
+ 
     files = parameter[1:]
     allLines = []
     answer = ""
-    print(parameter)
-    print(directions)
-    print(type(directions))
-
-    if(len(parameter) >= 2 and len(flag) == 0):
+    
+    if(len(parameter) >= 2):
+        
         keyword=parameter[0]
-        dic={}
         for f in files:
+            dic={}
             listlines=[]
             if(os.path.isfile(f)):
                 fil=open(f, 'r')
@@ -28,25 +26,28 @@ def grep(**kwargs):
                         lines=lines.strip('\n')
                         listlines.append(lines)
                 dic[f]=listlines
+                allLines.append(dic)
             else:
-                print("{} is a directory".format(f))
-        allLines.append(dic)
+               answer =  "{} is a directory".format(f)
+               return answer
     else:
-        print("invalid command")
+        answer = "invalid command"
+        return answer
     if(len(flag) == 1):
         flag[0] == '-l'
+        count =0
         for ans in allLines:
-            key=str(ans.keys())
+            key=list(ans.keys())[0]
             if(len(directions) == 0):
-                answer=answer + key
-                answer=answer + "\n"
-                return answer
+                answer=answer + key+ "\n"
+               
             elif(len(directions) == 2):
                 direct=directions[0]
                 file=directions[1]
                 f=open(file, direct)
                 f.write(key)
                 f.close()
+        return answer
     else:
         count=0
         for ans in allLines:
@@ -54,12 +55,12 @@ def grep(**kwargs):
             if(len(directions) == 0):
                 if(len(files) > 1):
                     for x in val:
-                        key=list(ans.keys())[count]
+                        key=list(ans.keys())[0]
                         count=count+1
                         for lis in x:
                            answer=answer + "{} : {}".format(key, lis)
                            answer=answer + "\n"
-                    return answer
+                    
                 else:
                     for ans in allLines:
                         val=list(ans.values())
@@ -67,13 +68,13 @@ def grep(**kwargs):
                             for y in x:
                                 answer=answer + y
                                 answer=answer + "\n"
-                    return answer
+                    
             elif(len(directions) == 2):
                 direct=directions[0]
                 file=directions[1]
                 if(len(files) > 1):
                     for x in val:
-                        key=list(ans.keys())[count]
+                        key=list(ans.keys())[0]
                         count=count+1
                         for lis in x:
                            answer=answer + "{} : {}".format(key, lis)
@@ -92,3 +93,4 @@ def grep(**kwargs):
                     f=open(file, direct)
                     f.write(answer)
                     f.close()
+        return answer

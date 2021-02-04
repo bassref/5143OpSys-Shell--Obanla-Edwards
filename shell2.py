@@ -1,7 +1,11 @@
 import threading
+
 import os
+
 from numpy.core.records import array
+
 import cmd_pkg as cp
+
 from cmd_pkg import parameters as par
 
 
@@ -114,9 +118,7 @@ class CommandHelper(object):
 
         else:
 
-            self.invoke(cmd=cmd, flags=flags, params=params,
-
-                        directions=directions)
+            return self.invoke(cmd=cmd, flags=flags, params=params, directions=directions)
 
     def invoke(self, **kwargs):
 
@@ -172,9 +174,7 @@ class CommandHelper(object):
 
         if not thread:
 
-            self.commands[cmd](flags=flags, params=params,
-
-                               directions=directions, tag=tag)
+            return self.commands[cmd](flags=flags, params=params, directions=directions, tag=tag)
 
         else:
 
@@ -183,7 +183,6 @@ class CommandHelper(object):
             if len(params) > 0:
 
                 c = threading.Thread(
-
                     target=self.commands[cmd], args=tuple(kwargs))
 
             else:
@@ -215,7 +214,7 @@ if __name__ == '__main__':
 
         tag = False
 
-        answer = None
+        answer = ""
 
         if('|' in command_input):
 
@@ -223,7 +222,7 @@ if __name__ == '__main__':
 
             length = len(command_input)
 
-            for i in command_input(range(0, len(command_input))):
+            for i in range(0, len(command_input)):
 
                 split2 = command_input[i].split()
 
@@ -231,9 +230,9 @@ if __name__ == '__main__':
 
                 params = split2[1:]
 
-                if(i != length):
+                if(i != length - 1):
 
-                    tag = True
+                    
 
                     if ch.exists(cmd):
 
@@ -241,23 +240,25 @@ if __name__ == '__main__':
 
                     else:
 
-                        print("Error: command %s doesn't exist." % (cmd))
+                        answer = "Error: command %s doesn't exist." % (cmd)
 
                         break
 
                 else:
 
                     if ch.exists(cmd):
-
+                        tag = True
                         params.append(answer)
 
-                        ch.parseArgs(cmd=cmd, params=params, tag=tag)
+                        answer = ch.parseArgs(cmd=cmd, params=params, tag=tag)
 
                     else:
 
-                        print("Error: command %s doesn't exist." % (cmd))
+                        answer = "Error: command %s doesn't exist." % (cmd)
 
                         break
+
+            print(answer)
 
         else:
 
@@ -275,8 +276,10 @@ if __name__ == '__main__':
 
             if ch.exists(cmd):
 
-                ch.parseArgs(cmd=cmd, params=params, tag=tag)
+                answer = ch.parseArgs(cmd=cmd, params=params, tag=tag)
 
             else:
 
-                print("Error: command %s doesn't exist." % (cmd))
+                answer = "Error: command %s doesn't exist." % (cmd)
+
+            print(answer)

@@ -17,69 +17,87 @@ def wc(**kwargs):
     wflag = False
     aflag = False
     el = False
-    
-    
-    
+
     answer = ""
     if(len(flag) >= 0 and len(parameter) > 0):
         for fname in parameter:
-            
-            if (os.path.isfile(fname)):
-                listed = {}
-                num_lines = 0
-                num_words = 0
-                num_chars = 0
-                with open(fname, 'r') as f:
-                    for line in f:
-                        words = line.split()
+            listed = {}
+            num_lines = 0
+            num_words = 0
+            num_chars = 0
+            if(tag == True):
+
+                newlist = fname.split('\n')
+
+                for tags in newlist:
+                    if(tags != ""):
+                        words = tags.split()
                         num_lines += 1
                         num_words += len(words)
-                        num_chars += len(line)
+                        num_chars += len(tags)
+
                     total_lines = total_lines+num_lines
                     total_char = total_char+num_chars
                     total_words = total_words+num_words
-                listed['fname'] = fname
-                listed['num_lines'] = num_lines
-                listed['num_words'] = num_words
-                listed['num_chars'] = num_chars
-                lsitall.append(listed)
-               
+                    listed['fname'] = fname
+                    listed['num_lines'] = num_lines
+                    listed['num_words'] = num_words
+                    listed['num_chars'] = num_chars + num_lines
+                    lsitall.append(listed)
+
             else:
-                el = True
-                answer = answer + "{} , is not a file".format(fname)
-                answer = answer + "0  0  0"
-                
-                return answer
+                if (os.path.isfile(fname)):
+
+                    with open(fname, 'r') as f:
+                        for line in f:
+                            words = line.split()
+                            num_lines += 1
+                            num_words += len(words)
+                            num_chars += len(line)
+                        total_lines = total_lines+num_lines
+                        total_char = total_char+num_chars
+                        total_words = total_words+num_words
+                    listed['fname'] = fname
+                    listed['num_lines'] = num_lines
+                    listed['num_words'] = num_words
+                    listed['num_chars'] = num_chars
+                    lsitall.append(listed)
+
+                else:
+                    el = True
+                    answer = "{} , is not a file".format(fname)
+                    answer = answer + "0  0  0"
+
+                    return answer
 
         if(len(parameter) > 1 and el == False):
-           
+
             for item in lsitall:
                 key = item['fname']
                 if(len(flag) == 1):
                     aflag = True
                     if(flag[0] == '-l'):
                         lflag = True
-                        answer = answer + "{} {}".format(item['num_lines'], key)
+                        answer = "{} {}".format(item['num_lines'], key)
                         answer = answer + "\n"
                     elif(flag[0] == '-m'):
                         mflag = True
-                        answer = answer +  "{} {}".format(item['num_chars'], key)
+                        answer = "{} {}".format(item['num_chars'], key)
                         answer = answer + "\n"
 
                     elif(flag[0] == '-w'):
                         wflag = True
-                        answer = answer +  "{} {}".format(item['num_words'], key)
+                        answer = "{} {}".format(item['num_words'], key)
                         answer = answer + "\n"
                     else:
-                        answer = answer + "invalid arg"
+                        answer = "invalid arg"
 
                 if(aflag == False):
                     answer = answer + "{} {} {} {}".format(
                         item['num_lines'], item['num_words'], item['num_chars'], item['fname'])
                     answer = answer + "\n"
-                
+
             if(aflag == False):
-               
                 answer = answer + "{} {} {} Total ".format(
                     total_lines, total_words, total_char)
                 answer = answer + "\n"
@@ -92,43 +110,43 @@ def wc(**kwargs):
             elif(wflag == True):
                 answer = answer + "{} Total ".format(total_words)
                 answer = answer + "\n"
-            
+
             if(len(directions) == 2):
-                
-                direct=directions[0]
-                file=directions[1]
-                f=open(file, direct)
+
+                direct = directions[0]
+                file = directions[1]
+                f = open(file, direct)
                 f.write(answer)
                 f.close()
             else:
-                         
+
                 return answer
         elif(len(parameter) == 1 and el == False):
             fname = parameter[0]
             dic1 = lsitall[0]
             if(len(flag) == 1):
                 if(flag[0] == '-l'):
-                    answer = answer + "{} {}".format(dic1['num_lines'], fname)
+                    answer = answer + " {}".format(dic1['num_lines'])
                     answer = answer + "\n"
                 elif(flag[0] == '-m'):
-                    answer = answer + "{} {}".format(dic1['num_chars'], fname)
+                    answer = answer + " {}".format(dic1['num_chars'])
                     answer = answer + "\n"
                 elif(flag[0] == '-w'):
-                    answer = answer + "{} {}".format(dic1['num_words'], fname)
+                    answer = answer + "{}".format(dic1['num_words'])
                     answer = answer + "\n"
                 else:
-                    answer = answer + "invalid arg"
-            
+                    answer = answer + "invalid argument"
+
             else:
                 lis = list(dic1.values())
 
-                answer = answer + "{} {} {}".format(lis[1], lis[2], lis[3], lis[0])
+                answer = answer + "{} {} {} {}".format(lis[1], lis[2], lis[3], lis[0])
                 answer = answer + "\n"
             if(len(directions) == 2):
-                direct=directions[0]
-                file=directions[1]
-                f=open(file, direct)
+                direct = directions[0]
+                file = directions[1]
+                f = open(file, direct)
                 f.write(answer)
                 f.close()
-            else:          
+            else:
                 return answer
