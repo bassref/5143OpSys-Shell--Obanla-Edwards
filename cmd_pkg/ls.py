@@ -181,19 +181,7 @@ def printlist(l):
 
 
 def ls(**kwargs):
-    """   
-    NAME
-        ls	list files and directories	
-    SYNOPSIS
-        ls		
-    DESCRIPTION
-       
-        -a	list all show hidden files
-        -l	long listing
-        -h	human readable sizes
-    EXAMPLES
-       ls - list all files and directory in current directory
-    """
+
 
     command = ['ls']
 

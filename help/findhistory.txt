@@ -1,0 +1,12 @@
+   """   
+    NAME
+        !x
+    SYNOPSIS
+        ![INT]
+    DESCRIPTION
+     Load command x from your history so you can run it again
+    EXAMPLES
+            !2
+            calls command 2 from the history log
+       
+    """

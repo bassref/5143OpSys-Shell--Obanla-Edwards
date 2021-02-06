@@ -3,17 +3,7 @@ import os
 
 
 def grep(**kwargs):
-    """   
-    NAME
-        grep 'keyword' file	search a file(s) files for keywords and print lines where pattern is found
-    SYNOPSIS
-        grep 'keyword' file
-    DESCRIPTION
-    grep -l	only return file names where the word or pattern is found
-    EXAMPLES
-        grep -l count test.tXt
-            searches for count in test.txt
-    """
+ 
     command = ['grep']
     parameter = kwargs['params']
     flag = kwargs['flags']

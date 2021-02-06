@@ -1,0 +1,13 @@
+ """   
+    NAME
+        cd -directory	change to named directory
+    SYNOPSIS
+        cd [option]	[filename]
+    DESCRIPTION
+      
+        ~	change to home-directory
+        ..	change to parent directory
+    EXAMPLES
+       cd mk -go to directory mk
+    """
+

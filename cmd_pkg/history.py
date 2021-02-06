@@ -2,16 +2,7 @@ from os import path
 
 
 def history(**kwargs):
-    """   
-    NAME
-        history - History log
-    SYNOPSIS
-        history
-    DESCRIPTION
-     show a history of all your commands
-    EXAMPLES
-       
-    """
+
     redirect = kwargs['directions']
     histdic = {}
     count = 1

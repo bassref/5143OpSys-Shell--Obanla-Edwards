@@ -39,18 +39,7 @@ def deleteDir(directory):
 
 
 def rmdir(**kwargs):
-    """   
-    NAME
-        rmdir
-    SYNOPSIS
-        rmdir  [file(s)]
-    DESCRIPTION
-     rmdir -remove a directory
-    EXAMPLES
-            rmdir  test
-            remove directory  test if its empty
-       
-    """
+
     command = ['rm']
     parameter = kwargs['params']
     flag = kwargs['flags']

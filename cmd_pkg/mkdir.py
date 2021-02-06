@@ -14,17 +14,7 @@ from pathlib import Path
 
 
 def mkdir(**kwargs):
-    """   
-    NAME
-        mkdir		make a directory
-    SYNOPSIS
-        mkdir [filename]
-    DESCRIPTION
-   
-    EXAMPLES
-       mkdir test
-       makes a directory test
-    """
+
     command = ['mkdir']
 
     parameter = kwargs['params']
@@ -62,7 +52,7 @@ def mkdir(**kwargs):
                 try:
 
                     os.mkdir(newdirectory)
-                    return answer
+                    
 
                 except OSError as error:
 

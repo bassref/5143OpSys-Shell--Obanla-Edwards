@@ -1,0 +1,16 @@
+    """     
+    NAME
+
+            help - file command documentation
+    SYNOPSIS
+
+            help [cmd]
+
+    DESCRIPTION
+
+            prints the entirety of the description of command  to std out
+
+    EXAMPLE
+
+            help rm
+                prints the documentation of rm.py"""
