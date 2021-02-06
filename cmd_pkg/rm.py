@@ -17,6 +17,7 @@ def checkstart(name):
 
 
 def deletefile(filename):
+
     answer = ""
     filepath = Path(filename)
 
@@ -88,6 +89,19 @@ def deleteDir(directory):
 
 
 def rm(**kwargs):
+    """   
+    NAME
+        rm remove a file
+    SYNOPSIS
+        rm [option] [file(s)]
+    DESCRIPTION
+     -r	recurse into non-empty folder to delete all
+        fil*e or *file or `file*	removes files that match a wildcard
+    EXAMPLES
+            rm  test
+            remove test from the directory
+       
+    """
 
     command = ['rm']
 

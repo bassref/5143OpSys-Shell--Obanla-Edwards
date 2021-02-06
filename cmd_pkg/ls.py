@@ -173,16 +173,27 @@ def lsa(filename):
 
 
 def printlist(l):
-
     answer = ""
-
     for i in range(len(l)//3+1):
 
         answer = answer + "\t " .join(l[i*3:(i+1)*3]) + "\n"
-        return answer
+    return answer
 
 
 def ls(**kwargs):
+    """   
+    NAME
+        ls	list files and directories	
+    SYNOPSIS
+        ls		
+    DESCRIPTION
+       
+        -a	list all show hidden files
+        -l	long listing
+        -h	human readable sizes
+    EXAMPLES
+       ls - list all files and directory in current directory
+    """
 
     command = ['ls']
 

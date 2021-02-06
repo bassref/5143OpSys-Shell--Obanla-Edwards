@@ -10,7 +10,17 @@ from pathlib import Path
 
 
 def cp(**kwargs):
-
+    """   
+    NAME
+        cp
+    SYNOPSIS
+        file1 file2	copy file1 and call it file2
+    DESCRIPTION
+       
+       cp file1 file2	copy file1 and call it file2
+    EXAMPLES
+       cd test.txt test2.txt - read test.txt and write to test2.txt
+    """
     command = ['cp']
 
     parameter = kwargs['params']

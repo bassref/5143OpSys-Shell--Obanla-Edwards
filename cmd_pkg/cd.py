@@ -6,6 +6,18 @@ from pathlib import Path
 
 
 def cd(**kwargs):
+    """   
+    NAME
+        cd -directory	change to named directory
+    SYNOPSIS
+        cd [option]	[filename]
+    DESCRIPTION
+      
+        ~	change to home-directory
+        ..	change to parent directory
+    EXAMPLES
+       cd mk -go to directory mk
+    """
 
     command = ['cd']
 
@@ -20,8 +32,8 @@ def cd(**kwargs):
     if(len(flag) == 0 and len(directions) == 0 and tag == False and len(parameter) == 0):
 
         home = str(Path.home())
-
         os.chdir(home)
+        return answer
 
     elif(len(flag) == 0 and len(directions) == 0 and tag == False and len(parameter) == 1):
 
@@ -32,6 +44,7 @@ def cd(**kwargs):
         if(isdir and os.access(directory, os.R_OK)):
 
             os.chdir(directory)
+            return answer
 
         else:
             answer= answer + "no such file or directory"
@@ -50,6 +63,7 @@ def cd(**kwargs):
             if(os.access(p, os.R_OK)):
 
                 os.chdir(p)
+                return answer
 
             else:
                 answer= answer + "permission denied"
@@ -61,14 +75,14 @@ def cd(**kwargs):
         elif(flag[0] == '~'):
 
             home = str(Path.home())
-
             os.chdir(home)
+            return answer
 
     elif(len(flag) == 0 and len(directions) > 0 and tag == False and len(parameter) == 1):
 
         home = str(Path.home())
-
         os.chdir(home)
+        return answer
 
     else:
         answer= answer + "invalid parameters"

@@ -3,6 +3,20 @@ import os
 
 
 def wc(**kwargs):
+    """   
+    NAME
+        wc -count number of lines/words/characters in file
+    SYNOPSIS
+        wc [option] [file(s)]
+    DESCRIPTION
+     -l	count number of lines in file
+    -m	count number of characters in file
+    -w	count number of words in file
+    EXAMPLES
+            wc  test
+            4 7  8 test i.e number of lines, words characters
+       
+    """
     command = ['wc']
     parameter = kwargs['params']
     flag = kwargs['flags']

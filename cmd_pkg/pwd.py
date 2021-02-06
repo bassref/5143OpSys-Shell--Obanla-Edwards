@@ -10,6 +10,17 @@ from pathlib import Path
 
 
 def pwd(**kwargs):
+    """   
+    NAME
+        pwd display the path of the current directory
+    SYNOPSIS
+        pwd
+    DESCRIPTION
+    display the path of the current directory
+    EXAMPLES
+            
+       
+    """
     directions = kwargs['directions']
 
     answer = ""
