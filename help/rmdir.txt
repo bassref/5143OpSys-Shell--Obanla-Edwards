@@ -7,6 +7,6 @@
      rmdir -remove a directory
     EXAMPLES
             rmdir  test
-            remove directory  test if its empty
+            remove directory  test, if test is  empty
        
     """

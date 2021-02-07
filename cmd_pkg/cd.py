@@ -21,8 +21,7 @@ def cd(**kwargs):
 
         home = str(Path.home())
         os.chdir(home)
-       
-
+        return answer
     elif(len(flag) == 0 and len(directions) == 0 and tag == False and len(parameter) == 1):
 
         directory = parameter[0]
@@ -33,13 +32,10 @@ def cd(**kwargs):
 
             os.chdir(directory)
             
-
         else:
             answer= answer + "no such file or directory"
             answer=answer + "\n"
-            return answer
-            
-
+        return answer
     elif(len(flag) == 1 and len(directions) == 0 and tag == False and len(parameter) == 0):
 
         if(flag[0] == '..'):
@@ -51,25 +47,22 @@ def cd(**kwargs):
             if(os.access(p, os.R_OK)):
 
                 os.chdir(p)
-                
-
             else:
                 answer= answer + "permission denied"
                 answer=answer + "\n"
-                return answer
-
-               
-
+            return answer
         elif(flag[0] == '~'):
 
             home = str(Path.home())
             os.chdir(home)
+        return answer
            
 
     elif(len(flag) == 0 and len(directions) > 0 and tag == False and len(parameter) == 1):
 
         home = str(Path.home())
         os.chdir(home)
+        return answer
       
 
     else:

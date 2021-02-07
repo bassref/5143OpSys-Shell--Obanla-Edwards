@@ -115,8 +115,8 @@ class CommandHelper(object):
                         indexArray.append(args[i+1])
 
                     else:
-
-                        params.append(vals)
+                        if('-' not in vals):
+                            params.append(vals)
 
         else:
 
@@ -127,7 +127,7 @@ class CommandHelper(object):
             return self.invoke(cmd=cmd, flags=flags, params=params, directions=directions, tag=tag)
 
         else:
-
+           
             return self.invoke(cmd=cmd, flags=flags, params=params, directions=directions)
 
     def invoke(self, **kwargs):
@@ -183,7 +183,7 @@ class CommandHelper(object):
         # One way to invoke using dictionary
 
         if not thread:
-
+            
             answer = self.commands[cmd](
                 flags=flags, params=params, directions=directions, tag=tag)
             return answer
@@ -206,30 +206,19 @@ class CommandHelper(object):
 
         return cmd in self.commands
 
-    def print_cmd(self, cmd):
-        """ This function "cleans" off the command line, then prints
 
-            whatever cmd that is passed to it to the bottom of the terminal.
 
-        """
 
-        prompt = os.getcwd() + '>>'
 
-        padding = " " * 80
-
-        sys.stdout.write("\r"+padding)
-
-        sys.stdout.write("\r"+prompt+cmd)
-
-        sys.stdout.flush()
-
-    def split(self, cmd):
+    def splitcmd(self, cmd):
+        
         basepath = os.path.dirname(__file__)
         filepath = os.path.abspath(os.path.join(basepath, "history.log"))
 
         while len(cmd.rstrip()) < 1:  # Check for empty lines
             print("Error: no command entered")
             cmd = input()
+            
 
         cmdTest = cmd.split()[0]
         if  cmd == 'exit':
@@ -242,7 +231,7 @@ class CommandHelper(object):
             if(str.isdigit(testhist)):
 
                 cmd = cp.findhistory(testhist)
-                print(cmd)
+                print_cmd(cmd)
 
             else:
 
@@ -252,7 +241,7 @@ class CommandHelper(object):
             log.write(f"{cmd}\n")
 
         tag = False
-
+        
         answer = None
 
         if('|' in cmd):
@@ -298,7 +287,7 @@ class CommandHelper(object):
                         answer = "Error: command %s doesn't exist." % (cmd)
 
                         break
-            
+            print('\r')
             print(answer)
 
         else:
@@ -310,144 +299,105 @@ class CommandHelper(object):
             cmd = cmd[0]
 
             if ch.exists(cmd):
-
+                
                 answer = self.parseArgs(cmd=cmd, params=params, tag=tag)
 
             else:
 
                 answer = "Error: command %s doesn't exist." % (cmd)
-
+            print('\r')
             print(answer)
 
 
+
+getch = gt.Getch() 
+prompt = os.getcwd() + '>>' 
+def print_cmd(cmd):
+    """ This function "cleans" off the command line, then prints
+
+        whatever cmd that is passed to it to the bottom of the terminal.
+
+    """
+    prompt = os.getcwd() + '>>'
+    padding = " " * 80
+    sys.stdout.write("\r"+padding)
+    sys.stdout.write("\r"+prompt+cmd)
+    sys.stdout.flush()
+
 if __name__ == '__main__':
-
-    ch = CommandHelper()
-
-    getch = gt.Getch()
-
     cmd = ""
-
-    ch.print_cmd(cmd)
+    print_cmd(cmd)
     basepath = os.path.dirname(__file__)
     filepath = os.path.abspath(os.path.join(basepath, "history.log"))
-
+    currpos = -1
+    index = len(cmd)
+    ch = CommandHelper()
     while True:
 
         char = getch()  # read a character (but don't print)
 
-        cmd = ""                               # empty cmd variable
-
-        currpos = -1
-
-        if char == '\x03' or cmd == 'exit':  # ctrl-c
-
-            raise SystemExit("Bye.")
-
+        if char == '\x03' or cmd == 'exit': # ctrl-c
+            raise SystemExit("\r")
+        
         elif char == '\x7f':                # back space pressed
-
             cmd = cmd[:-1]
-
-            ch.print_cmd(cmd)
-
+            print_cmd(cmd)
+            
         elif char in '\x1b':                # arrow key pressed
-
             null = getch()                  # waste a character
-
             direction = getch()             # grab the direction
-
+            
             if direction in 'A':            # up arrow pressed
-
                 # get the PREVIOUS command from your history (if there is one)
-
+                # prints out '↑' then erases it (just to show something)
                 lastLine = ""
-
                 with open(filepath, 'r') as f:
-
                     lastLine = f.readlines()[currpos]
-
                 currpos -= 1
-
-                cmd += lastLine
-
-                ch.print_cmd(cmd)
-
-                sleep(0.3)
+                cmd = lastLine
+               
+                cmd = cmd[:-1]
+                
+                
+                
             if direction in 'B':            # down arrow pressed
-
                 # get the NEXT command from history (if there is one)
-
                 # prints out '↓' then erases it (just to show something)
-
                 mrLine = ""
-
                 if(currpos != -1):
-
                     with open(filepath, 'r') as f:
-
                         mrLine = f.readlines()[currpos]
-
                     currpos += 1
-
-                    cmd += mrLine
+                    cmd = mrLine
 
                 else:
-
                     cmd = ""
-
-                ch.print_cmd(cmd)
-
-                sleep(0.3)
-
-            if direction in 'C':            # left arrow pressed
-
-                # move the cursor to the LEFT on your command prompt line
-
-                # prints out '←' then erases it (just to show something)
-
-                cmd += '←'
-
-                ch.print_cmd(cmd)
-
-                sleep(0.3)
-
                 cmd = cmd[:-1]
+            
+            if direction in 'C':            # left arrow pressed    
+                # move the cursor to the LEFT on your command prompt line
+                # prints out '←' then erases it (just to show something)
+                
+                direction='\033[<1>C'
+                
 
             if direction in 'D':            # right arrow pressed
-
                 # moves the cursor to the RIGHT on your command prompt line
-
                 # prints out '→' then erases it (just to show something)
+                direction='\033[<1>D'
+               
+            
+            print_cmd(cmd)                  # print the command (again)
 
-                cmd += '→'
-
-                ch.print_cmd(cmd)
-
-                sleep(0.3)
-
-                cmd = cmd[:-1]
-
-            ch.print_cmd(cmd)                  # print the command (again)
-
-        elif char in '\r':                  # return pressed
-
+        elif char in '\r':                  # return pressed 
+            
             # This 'elif' simulates something "happening" after pressing return
-
-            ch.split(cmd)
-
-            sleep(1)
-
-            # reset command to nothing (since we just executed it)
-
-            cmd = ""
-
-            ch.print_cmd(cmd)                  # now print empty cmd prompt
-
+            if(cmd !=''):
+            	ch.splitcmd(cmd)                  
+                
+            cmd = ""                        # reset command to nothing (since we just executed it)
+            print_cmd(cmd)                  # now print empty cmd prompt
         else:
-            path = os.getcwd() + '>>'
-            cmd += char
-            ch.print_cmd(cmd)
-            cmd = cmd + input()
-            ch.split(cmd)
-            cmd = ""
-            ch.print_cmd(cmd)
+            cmd += char                     # add typed character to our "cmd"
+            print_cmd(cmd)                  # print the cmd out
+            

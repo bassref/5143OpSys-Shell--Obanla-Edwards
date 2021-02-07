@@ -4,10 +4,10 @@
     SYNOPSIS
         rm [option] [file(s)]
     DESCRIPTION
-     -r	recurse into non-empty folder to delete all
-        fil*e or *file or `file*	removes files that match a wildcard
+    -r	recurse into non-empty folder to delete all
+    fil*e or *file or `file*	removes files that match a wildcard
     EXAMPLES
             rm  test
-            remove test from the directory
+            remove test from the current  directory
        
     """

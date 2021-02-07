@@ -26,6 +26,7 @@ def deletefile(filename):
         actualPath = filepath.resolve()
 
         os.remove(actualPath)
+        return answer
 
     elif(os.path.isdir(filename)):
 
@@ -33,7 +34,7 @@ def deletefile(filename):
         return answer
 
     else:
-         
+
         answer = answer + 'file {} does not exits'.format(filename)
         return answer
 
@@ -60,7 +61,7 @@ def deleteDir(directory):
             if(os.path.isfile(filee) and os.access(pathh, os.R_OK)):
 
                 os.remove(pathh)
-
+                
             elif(os.path.isdir(pathh) and os.access(pathh, os.R_OK)):
 
                 dir = os.listdir(pathh)
@@ -68,28 +69,30 @@ def deleteDir(directory):
                 if(len(dir) == 0):
 
                     os.rmdir(pathh)
+                    
 
                 else:
 
                     answer = answer + "contains a directory that is not empty"
-                    return answer
+                    answer = answer +'\n'
+            
 
         dirlen = os.listdir(x)
 
         if(len(dirlen) == 0):
 
             os.rmdir(x)
-
             os.chdir(currentdirectory)
+        return answer
 
     else:
 
         answer = answer + "directory does not exist"
+        
         return answer
 
 
 def rm(**kwargs):
-
 
     command = ['rm']
 
@@ -114,16 +117,19 @@ def rm(**kwargs):
 
                     if(os.path.isfile(files)):
 
-                        deletefile(files)
+                        answer = answer + deletefile(files)
 
                     else:
 
-                        answer = answer + 'cannot delete a directory {}'.format(files)
-                        return answer
+                        answer = answer + \
+                            'cannot delete a directory {}'.format(files)
+                        answer = answer +'\n'
+                
 
             else:
 
-                deletefile(filename)
+                answer = answer +deletefile(filename)
+        return answer
 
     elif(len(flag) == 1 and len(directions) == 0 and tag == False and len(parameter) > 0):
 
@@ -137,15 +143,16 @@ def rm(**kwargs):
 
                     if(os.path.isfile(files)):
 
-                        deletefile(files)
+                        answer = answer+ deletefile(files)
 
                     else:
 
-                        deleteDir(files)
+                        answer = answer+ deleteDir(files)
 
             else:
 
-                deleteDir(directory)
+                answer = answer + deleteDir(directory)
+        return answer
 
     else:
 

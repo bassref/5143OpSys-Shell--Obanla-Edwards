@@ -1,15 +1,4 @@
-import threading
-
-
-import sys
-
-
 import os
-
-
-import glob
-
-
 from pathlib import Path
 
 
@@ -49,25 +38,19 @@ def mkdir(**kwargs):
 
             if(isdir == False and permission == True):
 
-                try:
-
-                    os.mkdir(newdirectory)
-                    
-
-                except OSError as error:
-
-                    answer = error
-
-                    return answer
-
+                os.mkdir(newdirectory)
+                
             elif(isdir == True):
 
                 answer = answer + '{} already Exist'.format(directoryName)
-
-                return answer
+                answer = answer + '\n'
 
             elif(permission == False):
 
-                answer = answer + "No write permission in current directory"
+                answer = answer + " {} No write permission in current directory".format(directoryName)
+                answer = answer + '\n'
 
-                return answer
+        return answer
+    else:
+        answer = "invalid argument"
+        return answer

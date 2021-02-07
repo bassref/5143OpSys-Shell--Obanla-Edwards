@@ -21,21 +21,22 @@ def doflen(name):
 
 
 def deleteDir(directory):
-	
     p = Path(directory)
-    answer =""
+    answer = ""
     pathh = os.path.abspath(directory)
     if(os.path.isdir(pathh) and os.access(pathh, os.R_OK)):
         currentdirectory = Path.cwd()
         dirlen = os.listdir(pathh)
         if(len(dirlen) == 0):
             os.rmdir(pathh)
-            answer =answer + 'directory: {0} has been removed'.format(directory)
-            return answer
+            answer = answer + \
+                'directory: {0} has been removed'.format(directory)
+            
+        return answer
 
     else:
-        answer =answer +"directory does not exist"
-        return answer
+        answer = answer + "directory does not exist"
+    return answer
 
 
 def rmdir(**kwargs):
@@ -45,7 +46,7 @@ def rmdir(**kwargs):
     flag = kwargs['flags']
     directions = kwargs['directions']
     tag = kwargs['tag']
-    answer =""
+    answer = ""
     if(len(flag) == 0 and len(directions) == 0 and tag == False and len(parameter) > 0):
         for directory in parameter:
             p = Path(directory)
@@ -53,27 +54,35 @@ def rmdir(**kwargs):
             if('*' in directory):
                 listoffiles = checkstart(directory)
                 for direct in listoffiles:
-                    length = doflen(direct)
                     pathh2 = os.path.abspath(direct)
                     if(os.path.isdir(pathh2) and os.access(pathh2, os.R_OK)):
+                        length = doflen(direct)
                         if(length == True):
-                            deleteDir(direct)
+                            answer = answer + deleteDir(direct)
                         else:
-                            answer =answer + "{} not empty".format(direct)
-                            return answer
-                            
+                            answer = answer + "{} not empty".format(direct)
+                            answer = answer +'\n'
+                       
                     else:
-                        answer =answer + "{} cannot delete file".format(direct)
-                        return answer
+                        answer = answer + \
+                            "{} cannot delete file".format(direct)
+                        answer = answer +'\n'
+                return answer
+                        
 
             else:
-                length = doflen(directory)
+
                 if(os.path.isdir(pathh) and os.access(pathh, os.R_OK)):
+                    length = doflen(directory)
                     if(length == True):
-                        deleteDir(directory)
+                        answer = answer + deleteDir(directory)
+                    else:
+                        answer = answer + "{} not empty".format(directory)
+                        answer = answer +'\n'
                 else:
-                     answer =answer +"{} cannot delete file".format(directory)
-                     return answer
+                    answer = answer + "{} cannot delete file".format(directory)
+                    answer = answer +'\n'
+            return answer
     else:
-         answer =answer +"not enough arguments"
-         return answer
+        answer = answer + "not enough arguments"
+    return answer

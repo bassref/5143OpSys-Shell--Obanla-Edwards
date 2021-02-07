@@ -263,7 +263,6 @@ def ls(**kwargs):
                     return answer
 
             else:
-
                 answer = "invalid parameter"
                 return answer
 

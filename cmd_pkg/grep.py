@@ -3,7 +3,7 @@ import os
 
 
 def grep(**kwargs):
- 
+  
     command = ['grep']
     parameter = kwargs['params']
     flag = kwargs['flags']
@@ -29,8 +29,10 @@ def grep(**kwargs):
                 dic[f]=listlines
                 allLines.append(dic)
             else:
-               answer =  "{} is a directory".format(f)
-               return answer
+               answer = answer+ "{} is a directory".format(f)
+               answer = answer +'\n'
+            
+        
     else:
         answer = "invalid command"
         return answer
@@ -40,7 +42,8 @@ def grep(**kwargs):
         for ans in allLines:
             key=list(ans.keys())[0]
             if(len(directions) == 0):
-                answer=answer + key+ "\n"
+                answer=answer + key
+                answer = answer +'\n'
                
             elif(len(directions) == 2):
                 direct=directions[0]
@@ -51,6 +54,8 @@ def grep(**kwargs):
         return answer
     else:
         count=0
+        
+        print(allLines)
         for ans in allLines:
             val=list(ans.values())
             if(len(directions) == 0):

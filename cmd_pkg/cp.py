@@ -1,11 +1,4 @@
-import threading
-
-import sys
-
 import os
-
-import glob
-
 from pathlib import Path
 
 
@@ -22,6 +15,7 @@ def cp(**kwargs):
     directions = kwargs['directions']
 
     tag = kwargs['tag']
+    answer =''
 
     if(len(parameter) == 2 and len(flag) == 0 and len(directions) == 0 and tag == False):
 
@@ -31,48 +25,33 @@ def cp(**kwargs):
 
         f1path = Path(file1)
 
-        f2path = Path(file2)
-
         if (os.path.isfile(file1)):
-
-            test1 = os.path.isfile(file1)
-
-            test2 = os.path.isfile(file2)
-
+            
             permissionf1 = os.access(f1path, os.R_OK)
 
-            permissionf2 = os.access(f2path, os.W_OK)
-
             if(permissionf1 == True):
+                f1 = open(file1, "r")
 
-                try:
+                f2 = open(file2, "w")
 
-                    f1 = open(file1, "r")
+                for x in f1:
 
-                    f2 = open(file2, "w")
+                    f2.write(x)
 
-                    for x in f1:
+                f1.close()
 
-                        f2.write(x)
-
-                    f1.close()
-
-                    f2.close()
-
-                    print("copy complete")
-
-                except IOError as error:
-
-                    print(error)
+                f2.close()
 
             else:
 
-                print("insufficient permmision")
+               answer = "insufficient permmision"
+            return answer
 
         else:
 
-            print("file does not exisit")
+            answer = "{} file does not exisit".format(file1)
+            return answer
 
     else:
-
-        print("invalid arguments")
+        answer = "invalid arguments"
+        return answer

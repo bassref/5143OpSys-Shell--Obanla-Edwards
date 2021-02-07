@@ -1,9 +1,6 @@
-import sys
+
 import os
-
-
 def wc(**kwargs):
-
     command = ['wc']
     parameter = kwargs['params']
     flag = kwargs['flags']
@@ -68,8 +65,8 @@ def wc(**kwargs):
                     el = True
                     answer = "{} , is not a file".format(fname)
                     answer = answer + "0  0  0"
+                    answer = answer + '\n'
 
-                    return answer
 
         if(len(parameter) > 1 and el == False):
 
@@ -79,16 +76,16 @@ def wc(**kwargs):
                     aflag = True
                     if(flag[0] == '-l'):
                         lflag = True
-                        answer = "{} {}".format(item['num_lines'], key)
+                        answer = answer + "{} {}".format(item['num_lines'], key)
                         answer = answer + "\n"
                     elif(flag[0] == '-m'):
                         mflag = True
-                        answer = "{} {}".format(item['num_chars'], key)
+                        answer = answer + "{} {}".format(item['num_chars'], key)
                         answer = answer + "\n"
 
                     elif(flag[0] == '-w'):
                         wflag = True
-                        answer = "{} {}".format(item['num_words'], key)
+                        answer = answer + "{} {}".format(item['num_words'], key)
                         answer = answer + "\n"
                     else:
                         answer = "invalid arg"
