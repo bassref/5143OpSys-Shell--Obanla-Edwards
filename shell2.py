@@ -52,6 +52,12 @@ class CommandHelper(object):
         self.commands['findhistory'] = cp.findhistory
         self.commands['help'] = cp.help
 
+        self.commands['tail'] = cp.tail
+
+
+
+
+
         self.possibleflag = par.flag()
 
         self.possibleDirections = par.direct()
@@ -115,7 +121,7 @@ class CommandHelper(object):
                         indexArray.append(args[i+1])
 
                     else:
-                        if('-' not in vals):
+                        
                             params.append(vals)
 
         else:
@@ -246,27 +252,25 @@ class CommandHelper(object):
 
         if('|' in cmd):
 
-            cmd = cmd.split('|')
-
-            length = len(cmd)
-
-            for i in range(0, len(cmd)):
-
-                split2 = cmd[i].split()
-
+            cmd2 = cmd.split('|')
+            length = len(cmd2)
+            for i in range(0, len(cmd2)):
+                split2 = cmd2[i].split()
+                
                 cmd = split2[0]
-
+                
+                
                 params = split2[1:]
-
+                
                 if(i != length - 1):
 
                     if ch.exists(cmd):
-
+                        
                         answer = self.parseArgs(
                             cmd=cmd, params=params, tag=tag)
 
                     else:
-
+                        
                         answer = "Error: command %s doesn't exist." % (cmd)
 
                         break
@@ -276,14 +280,13 @@ class CommandHelper(object):
                     if ch.exists(cmd):
 
                         tag = True
-
                         params.append(answer)
-
+                       
                         answer = self.parseArgs(
                             cmd=cmd, params=params, tag=tag)
 
                     else:
-
+                        
                         answer = "Error: command %s doesn't exist." % (cmd)
 
                         break

@@ -28,6 +28,8 @@ def possibleparameters():
 
     ppFlag['grep'] = ['-l']
 
+    ppFlag['tail'] =['-n']
+
     ppFlag['wc'] =['-l','-m','-w']
     ppFlag['help'] =[]
 
