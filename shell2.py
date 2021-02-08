@@ -59,6 +59,7 @@ class CommandHelper(object):
 
         self.commands['who'] = cp.who
 
+        self.commands['sort'] = cp.sort
 
 
 

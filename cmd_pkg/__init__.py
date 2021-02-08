@@ -16,3 +16,4 @@ from cmd_pkg.help import help
 from cmd_pkg.tail import tail
 from cmd_pkg.head import head
 from cmd_pkg.who import who
+from cmd_pkg.sort import sort

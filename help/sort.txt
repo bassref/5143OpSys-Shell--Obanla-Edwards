@@ -1,0 +1,19 @@
+
+"""
+NAME
+
+		sort - sort lines of text files
+
+SYNOPSIS
+
+		sort [FILE]
+
+DESCRIPTION
+
+		sort data in a file print results to output
+
+EXAMPLE
+
+		sort file.txt
+            returns the results of the sorted file.txt to the termina;
+"""

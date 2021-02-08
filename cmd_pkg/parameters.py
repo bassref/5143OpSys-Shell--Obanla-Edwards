@@ -31,8 +31,12 @@ def possibleparameters():
     ppFlag['tail'] =['-n']
 
     ppFlag['wc'] =['-l','-m','-w']
+
     ppFlag['help'] =[]
+
     ppFlag['who'] =[]
+
+    ppFlag['sort'] =[]
 
 
 
