@@ -148,3 +148,23 @@ def wc(**kwargs):
                 
             else:
                 return answer
+    elif(len(flag) == 0 and len(parameter) == 0 and len(directions) == 2):
+        num_lines = 0
+        num_words = 0
+        num_chars = 0
+        answer =''
+        if(os.path.isfile(directions[0])):
+            if(directions[1] == 'r+'):
+                with open(directions[0], "r+") as file:
+                    for line in file:
+                        words = line.split()
+                        num_lines += 1
+                        num_words += len(words)
+                        num_chars += len(line)
+            answer = answer + "{} {} {} {}".format(num_lines, num_words,num_chars, directions[0])
+            return answer
+        else:
+            answer = answer +"{} is not a file".format(directions[0])
+            return answer
+    else:
+        answer = 'invalid argument'

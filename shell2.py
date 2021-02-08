@@ -87,6 +87,8 @@ class CommandHelper(object):
 
         indexArray = []
 
+        readT = False
+
         if(len(args) > 0):
 
             for vals, i in zip(args, range(0, len(args))):
@@ -112,7 +114,7 @@ class CommandHelper(object):
                         elif vals == '<':
 
                             vals = "r+"
-
+                            readT = True
                             directions.append(args[i-1])
 
                             indexArray.append(args[i-1])
@@ -120,10 +122,10 @@ class CommandHelper(object):
                         directions.append(vals)
 
                         indexArray.append(vals)
+                        if readT == False:
+                            directions.append(args[i+1])
 
-                        directions.append(args[i+1])
-
-                        indexArray.append(args[i+1])
+                            indexArray.append(args[i+1])
 
                     else:
                         

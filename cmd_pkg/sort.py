@@ -1,6 +1,6 @@
+import os
 
 def sort(**kwargs):
-
 
     command = ['sort']
 
@@ -12,9 +12,9 @@ def sort(**kwargs):
 
     tag = kwargs['tag']
 
-    answer =''
-    if(len(flag) == 0 and len(parameter) == 1 ):
-        line =[]
+    answer = ''
+    if(len(flag) == 0 and len(parameter) == 1):
+        line = []
         if tag == False:
             with open(parameter[0], "r+") as f:
                 line = f.read().splitlines()
@@ -24,7 +24,7 @@ def sort(**kwargs):
             line.sort()
         for x in line:
             answer = answer + x
-            answer = answer +'\n'
+            answer = answer + '\n'
         if(len(directions) == 2):
             direct = directions[0]
             file = directions[1]
@@ -33,8 +33,20 @@ def sort(**kwargs):
             f.close()
         else:
             return answer
+    elif(len(flag) == 0 and len(parameter) == 0 and len(directions) == 2):
+        line =[]
+        if(os.path.isfile(directions[0])):
+            if(directions[1] == 'r+'):
+                with open(directions[0], "r+") as f:
+                    line = f.read().splitlines()
+                line.sort()
+                for x in line:
+                    answer = answer + x
+                    answer = answer + '\n'
+            return answer
+        else:
+            answer = answer +"{} is not a file".format(directions[0])
+            return answer
     else:
-        answer ='invalid argument'
+        answer = 'invalid argument'
         return answer
-   
-        
