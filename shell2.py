@@ -294,8 +294,12 @@ class CommandHelper(object):
                         answer = "Error: command %s doesn't exist." % (cmd)
 
                         break
-            print('\r')
-            print(answer)
+            
+            if(answer == None):
+                print('\r')
+            else:
+                print('\r')
+                print(answer)
 
         else:
 
@@ -312,8 +316,12 @@ class CommandHelper(object):
             else:
 
                 answer = "Error: command %s doesn't exist." % (cmd)
-            print('\r')
-            print(answer)
+            
+            if(answer == None):
+                print('\r')
+            else:
+                print('\r')
+                print(answer)
 
 
 
