@@ -24,7 +24,17 @@ def grep(**kwargs):
                 with open(f, 'r') as fil:
                     for lines in fil:
                         if(keyword in lines):
+                            lisj =[]
                             lines=lines.strip('\n')
+                            spliedline = lines.split()
+                            for i in range (0,len(spliedline)):
+                                if(spliedline[i] == keyword):
+                                    A = spliedline[i]
+                                    s = "\033[91m {}\033[00m" .format(A)
+                                    lisj.append(s)
+                                else:
+                                    lisj.append(spliedline[i])
+                            lines = " ".join(lisj)
                             listlines.append(lines)
                 dic[f]=listlines
                 allLines.append(dic)
@@ -55,7 +65,7 @@ def grep(**kwargs):
     else:
         count=0
         
-        print(allLines)
+        
         for ans in allLines:
             val=list(ans.values())
             if(len(directions) == 0):
