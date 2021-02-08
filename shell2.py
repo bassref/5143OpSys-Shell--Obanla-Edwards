@@ -53,7 +53,7 @@ class CommandHelper(object):
         self.commands['help'] = cp.help
 
         self.commands['tail'] = cp.tail
-
+        self.commands['head'] = cp.head
 
 
 

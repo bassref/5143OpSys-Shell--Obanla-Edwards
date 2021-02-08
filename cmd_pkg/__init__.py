@@ -14,3 +14,4 @@ from cmd_pkg.history import history
 from cmd_pkg.findhistory import findhistory
 from cmd_pkg.help import help
 from cmd_pkg.tail import tail
+from cmd_pkg.head import head

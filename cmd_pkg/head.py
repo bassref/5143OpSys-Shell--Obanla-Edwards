@@ -2,9 +2,8 @@ import os
 from pathlib import Path
 from os import path
 
-def tail(**kwargs):
-
-    command = ['tail']
+def head(**kwargs):
+    command = ['head']
 
     parameter = kwargs['params']
 
@@ -29,7 +28,7 @@ def tail(**kwargs):
         
         if(os.path.isfile(filename)):
             with open(filename) as file: 
-                for line in (file.readlines() [-num:]): 
+                for line in (file.readlines() [:num]): 
                     answer = answer + line.strip()
                     answer = answer +'\n'
                     num-=1
@@ -51,7 +50,7 @@ def tail(**kwargs):
             num = flag[0]
         elif(length <num ):
             num = length
-        for i in range(length-num+1 ,length):
+        for i in range(0 ,num):
             answer = answer + lis[i]
             answer = answer + '\n'
         if(len(directions) == 2):
@@ -64,8 +63,3 @@ def tail(**kwargs):
             return answer
     else:
         answer ="invalid command"
-
-       
-
-
-

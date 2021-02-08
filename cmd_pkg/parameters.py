@@ -41,7 +41,7 @@ def possibleparameters():
 
 def flag():
 
-    flags =['~','*','-a','-b','-l','-h','-r','-m','-w','..']
+    flags =['~','*','-a','-b','-l','-h','-r','-m','-w','..','-n']
 
     return flags
 
