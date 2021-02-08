@@ -3,6 +3,7 @@ from os import path
 def help(**kwargs):
     
     parameter = kwargs['params']
+    directions = kwargs['directions']
     cmd =''
     answer =""
     
@@ -17,5 +18,14 @@ def help(**kwargs):
     basepath = path.dirname(__file__)
     filepath = path.abspath(path.join(basepath, "..", f"help/{cmd}.txt"))
     with open(filepath,"r") as f:
-        text = f.read()
-    return text
+        answer = f.read()
+
+    if(len(directions) == 2):
+        direct = directions[0]
+        fil = directions[1]
+        with open(fil, direct) as f:
+            f.write(answer)
+        
+        
+    else:
+        return answer

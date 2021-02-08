@@ -1,0 +1,12 @@
+    """   
+    NAME
+        head	display the first few lines of a file
+    SYNOPSIS
+        head	 [filename]
+    DESCRIPTION
+        head	file	display the first few lines of a file
+        -n	how many lines to display
+    EXAMPLES
+       head test
+        Display first ten lines of test
+    """

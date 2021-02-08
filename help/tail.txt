@@ -1,0 +1,12 @@
+    """   
+    NAME
+        tail	display the last few lines of a file
+    SYNOPSIS
+        tail	 [filename]
+    DESCRIPTION
+        tail	file	display the last few lines of a file
+        -n	how many lines to display
+    EXAMPLES
+       tail test
+        Display last ten lines of test
+    """

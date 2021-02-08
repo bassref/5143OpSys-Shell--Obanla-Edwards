@@ -50,10 +50,14 @@ class CommandHelper(object):
         self.commands['history'] = cp.history
 
         self.commands['findhistory'] = cp.findhistory
+
         self.commands['help'] = cp.help
 
         self.commands['tail'] = cp.tail
+
         self.commands['head'] = cp.head
+
+        self.commands['who'] = cp.who
 
 
 

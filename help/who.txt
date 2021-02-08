@@ -1,0 +1,11 @@
+    """   
+    NAME
+        who	list users currently logged in
+    SYNOPSIS
+        who	
+    DESCRIPTION
+       list users currently logged in
+    EXAMPLES
+      who 
+            prints list of current users
+    """
