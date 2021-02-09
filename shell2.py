@@ -62,6 +62,8 @@ class CommandHelper(object):
 
         self.commands['sort'] = cp.sort
 
+        self.commands['chmod'] = cp.chmod
+
 
 
         self.possibleflag = par.flag()

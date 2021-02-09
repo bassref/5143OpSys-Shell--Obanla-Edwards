@@ -1,0 +1,13 @@
+    """   
+    NAME
+       chmod	
+    SYNOPSIS
+        chmod  [INT](000 - 777)	[FILE]
+    DESCRIPTION
+       
+        
+    EXAMPLES
+      chmod 767 file.txt 
+        change file permission t0 rwx-rw-rwx
+
+    """

@@ -38,6 +38,8 @@ def possibleparameters():
 
     ppFlag['sort'] =[]
 
+    ppFlag['chmod'] =[]
+
 
 
 
