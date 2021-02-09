@@ -15,6 +15,7 @@ import numpy as np
 import getch as gt
 
 from time import sleep
+import re
 
 
 class CommandHelper(object):
@@ -260,6 +261,7 @@ class CommandHelper(object):
         if('|' in cmd):
 
             cmd2 = cmd.split('|')
+            fmcmd = cmd2[0]
             length = len(cmd2)
             for i in range(0, len(cmd2)):
                 split2 = cmd2[i].split()
@@ -285,9 +287,26 @@ class CommandHelper(object):
                 else:
 
                     if ch.exists(cmd):
-
                         tag = True
-                        params.append(answer)
+                        
+                        if 'ls' in fmcmd:
+                            answer = answer.replace('\n',',')
+                            ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
+                            result = ansi_escape.sub('', answer) 
+                            splitedans = result.split("\t")
+                            valin =[]
+                            for item in splitedans:
+                                if ',' in item:
+                                    result = item.split(",")
+                                    splitedans.remove(item)
+                                    valin.extend(result)
+                            splitedans.extend(valin)
+                            
+                            
+                        else:
+                            splitedans = answer.split("\n")
+                        for item in splitedans:
+                            params.append(item)
                        
                         answer = self.parseArgs(
                             cmd=cmd, params=params, tag=tag)

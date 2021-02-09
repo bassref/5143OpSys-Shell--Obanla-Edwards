@@ -33,7 +33,7 @@ def cat(**kwargs):
             else:
                 return answer
         else:
-            files = parameter[0].split("\n")
+            files = parameter
             for fil in files:
                 lines =[]
                 if(os.path.isfile(fil)):

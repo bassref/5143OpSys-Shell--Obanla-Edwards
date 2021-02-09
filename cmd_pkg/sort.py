@@ -13,14 +13,14 @@ def sort(**kwargs):
     tag = kwargs['tag']
 
     answer = ''
-    if(len(flag) == 0 and len(parameter) == 1):
+    if(len(flag) == 0 and len(parameter) >= 1):
         line = []
         if tag == False:
             with open(parameter[0], "r+") as f:
                 line = f.read().splitlines()
             line.sort()
         else:
-            line = parameter[0].split('\n')
+            line = parameter
             line.sort()
         for x in line:
             answer = answer + x

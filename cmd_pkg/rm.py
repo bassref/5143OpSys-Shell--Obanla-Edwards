@@ -1,7 +1,3 @@
-import threading
-
-import sys
-
 import os
 
 import glob
@@ -105,7 +101,7 @@ def rm(**kwargs):
     tag = kwargs['tag']
     answer = ""
 
-    if(len(flag) == 0 and len(directions) == 0 and tag == False and len(parameter) > 0):
+    if(len(flag) == 0 and len(directions) == 0  and len(parameter) > 0):
 
         for filename in parameter:
 
@@ -131,7 +127,7 @@ def rm(**kwargs):
                 answer = answer +deletefile(filename)
         return answer
 
-    elif(len(flag) == 1 and len(directions) == 0 and tag == False and len(parameter) > 0):
+    elif(len(flag) == 1 and len(directions) == 0  and len(parameter) > 0):
 
         for directory in parameter:
 

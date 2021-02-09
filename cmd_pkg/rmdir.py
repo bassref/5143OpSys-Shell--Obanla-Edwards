@@ -47,7 +47,7 @@ def rmdir(**kwargs):
     directions = kwargs['directions']
     tag = kwargs['tag']
     answer = ""
-    if(len(flag) == 0 and len(directions) == 0 and tag == False and len(parameter) > 0):
+    if(len(flag) == 0 and len(directions) == 0  and len(parameter) > 0):
         for directory in parameter:
             p = Path(directory)
             pathh = os.path.abspath(directory)

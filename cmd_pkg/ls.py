@@ -2,7 +2,7 @@ import threading
 
 import sys
 import colorama
-from colorama import Fore, Style
+from colorama import Fore, Style,Back
 import os
 
 import glob
@@ -174,19 +174,14 @@ def lsa(filename):
 
 
 def printlist(l):
+    colorama.init(autoreset=True)
     answer = ""
-    lis =[]
+
     for i in range (0,len(l)):
-        
         if(os.path.isdir(l[i])):
-            
-            A = l[i]
-            s = "\033[96m {}\033[00m" .format(A)
-            lis.append(s)
-        else:
-            lis.append(l[i])
-    for i in range(len(lis)//3+1):
-        answer = answer + "\t " .join(lis[i*3:(i+1)*3]) + "\n"
+            l[i] = (Fore.BLUE + l[i] + Style.RESET_ALL ) 
+    for i in range(len(l)//3+1):
+        answer = answer + "\t " .join(l[i*3:(i+1)*3]) + "\n"
     return answer
 
 

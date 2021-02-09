@@ -43,15 +43,16 @@ def tail(**kwargs):
                 
         else:
             return answer
-    elif(len(flag) >= 0 and len(parameter) == 1 and tag == True):
-        lis = parameter[0].split('\n')
+    elif(len(flag) >= 0 and len(parameter) > 0 and tag == True):
+        lis = parameter
         length = len(lis)
         num =10
         if(len(flag) ==1 and flag[0] == '-n'):
-            num = flag[0]
+            num = int(parameter[0])
         elif(length <num ):
             num = length
-        for i in range(length-num+1 ,length):
+        toadd = (length-num) -1
+        for i in range(toadd ,length):
             answer = answer + lis[i]
             answer = answer + '\n'
         if(len(directions) == 2):

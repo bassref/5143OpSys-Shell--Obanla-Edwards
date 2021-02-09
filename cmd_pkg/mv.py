@@ -24,7 +24,7 @@ def mv(**kwargs):
     length = len(parameter)
     lenm = int(length - 1)
 
-    path = os.getcwd()
+ 
 
     answer = ""
 
@@ -42,20 +42,21 @@ def mv(**kwargs):
 
         destination = parameter[-1]
 
-        print(destination)
-
         for source in para:
 
             if(os.path.exists(source) & os.path.exists(destination)):
+                try:
 
-                shutil.move(source, destination)
+                    shutil.move(source, destination)
+                except Exception as e:
+                    answer = e       
 
             else:
 
                 answer = answer + \
                     "{} or {} does not exist".format(source, destination)
 
-                return answer
+        return answer
 
     else:
 
