@@ -4,8 +4,6 @@ import sys
 import glob
 import shutil
 from pathlib import Path
-# If the parameters are just files, print them on the screen
-
 
 def cat(**kwargs):
     command = ['cat']

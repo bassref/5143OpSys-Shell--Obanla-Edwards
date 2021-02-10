@@ -77,6 +77,7 @@ class CommandHelper(object):
 
         self.pipe = par.piped()
 
+    # divides parameters into redirect,flag and parameters
     def parseArgs(self, **kwargs):
 
         flags = []
@@ -151,6 +152,7 @@ class CommandHelper(object):
            
             return self.invoke(cmd=cmd, flags=flags, params=params, directions=directions,thread =thread)
 
+    #calls the appopriate function 
     def invoke(self, **kwargs):
 
         if 'cmd' in kwargs:
@@ -231,7 +233,7 @@ class CommandHelper(object):
 
 
 
-
+    #splits the command if it has a pipe 
     def splitcmd(self, cmd):
         
         basepath = os.path.dirname(__file__)
