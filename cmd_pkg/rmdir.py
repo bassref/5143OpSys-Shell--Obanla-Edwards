@@ -67,7 +67,7 @@ def rmdir(**kwargs):
                         answer = answer + \
                             "{} cannot delete file".format(direct)
                         answer = answer +'\n'
-                return answer
+                
                         
 
             else:

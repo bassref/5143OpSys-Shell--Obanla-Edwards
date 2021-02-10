@@ -217,60 +217,60 @@ def ls(**kwargs):
 
         longlist = []
 
-        for fl in flag:
+        fl =flag[0]
 
-            if(fl == '-l'):
+        if(fl == '-l'):
 
-                for files in l:
+            for files in l:
 
-                    name = path_leaf(files)
+                name = path_leaf(files)
 
-                    val = lslong(name, True)
+                val = lslong(name, True)
 
-                    longlist.append(val)
+                longlist.append(val)
 
-                for item in longlist:
-                    answer = answer + item
-                    answer = answer + "\n"
-                if(len(directions) == 2):
-                    direct = directions[0]
-                    file = directions[1]
-                    f = open(file, direct)
-                    f.write(answer)
-                    f.close()
-                else:
-                    return answer
-
-            elif(fl == '-a'):
-
-                val = lsa(filename)
-
-                answer = printlist(val)
-                if(len(directions) == 2):
-                    direct = directions[0]
-                    file = directions[1]
-                    f = open(file, direct)
-                    f.write(answer)
-                    f.close()
-                else:
-                    return answer
-
-            elif(fl == '-h'):
-
-                val = lsh(filename)
-                answer = printlist(val)
-                if(len(directions) == 2):
-                    direct = directions[0]
-                    file = directions[1]
-                    f = open(file, direct)
-                    f.write(answer)
-                    f.close()
-                else:
-                    return answer
-
+            for item in longlist:
+                answer = answer + item
+                answer = answer + "\n"
+            if(len(directions) == 2):
+                direct = directions[0]
+                file = directions[1]
+                f = open(file, direct)
+                f.write(answer)
+                f.close()
             else:
-                answer = "invalid parameter"
                 return answer
+
+        elif(fl == '-a'):
+
+            val = lsa(filename)
+
+            answer = printlist(val)
+            if(len(directions) == 2):
+                direct = directions[0]
+                file = directions[1]
+                f = open(file, direct)
+                f.write(answer)
+                f.close()
+            else:
+                return answer
+
+        elif(fl == '-h'):
+
+            val = lsh(filename)
+            answer = printlist(val)
+            if(len(directions) == 2):
+                direct = directions[0]
+                file = directions[1]
+                f = open(file, direct)
+                f.write(answer)
+                f.close()
+            else:
+                return answer
+
+        else:
+            answer = "invalid parameter"
+            return answer
 
     elif(len(flag) == 2 and len(parameter) == 0):
 

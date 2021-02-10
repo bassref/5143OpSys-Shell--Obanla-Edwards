@@ -52,5 +52,6 @@ def cat(**kwargs):
 
     else:
         answer = "invalid parameters"
+        return answer
 			
 

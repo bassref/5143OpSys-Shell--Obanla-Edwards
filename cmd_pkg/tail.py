@@ -65,20 +65,21 @@ def tail(**kwargs):
             return answer
     elif(len(flag) == 0 and len(parameter) == 0 and len(directions) == 2):
         num =10
-        if(os.path.isfile(directions[0])):
-            if(directions[1] == 'r+'):
-                with open(directions[0], "r+") as file:
+        if(os.path.isfile(directions[1])):
+            if(directions[0] == 'r+'):
+                with open(directions[1], "r+") as file:
                     for line in (file.readlines() [-num:]): 
                         answer = answer + line.strip()
                         answer = answer +'\n'
                         num-=1
             return answer
         else:
-            answer = answer +"{} is not a file".format(directions[0])
+            answer = answer +"{} is not a file".format(directions[1])
             return answer
 
     else:
         answer ="invalid command"
+        return answer
 
        
 

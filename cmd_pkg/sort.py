@@ -35,9 +35,9 @@ def sort(**kwargs):
             return answer
     elif(len(flag) == 0 and len(parameter) == 0 and len(directions) == 2):
         line =[]
-        if(os.path.isfile(directions[0])):
-            if(directions[1] == 'r+'):
-                with open(directions[0], "r+") as f:
+        if(os.path.isfile(directions[1])):
+            if(directions[0] == 'r+'):
+                with open(directions[1], "r+") as f:
                     line = f.read().splitlines()
                 line.sort()
                 for x in line:
@@ -45,7 +45,7 @@ def sort(**kwargs):
                     answer = answer + '\n'
             return answer
         else:
-            answer = answer +"{} is not a file".format(directions[0])
+            answer = answer +"{} is not a file".format(directions[1])
             return answer
     else:
         answer = 'invalid argument'

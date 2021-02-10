@@ -153,9 +153,9 @@ def wc(**kwargs):
         num_words = 0
         num_chars = 0
         answer =''
-        if(os.path.isfile(directions[0])):
-            if(directions[1] == 'r+'):
-                with open(directions[0], "r+") as file:
+        if(os.path.isfile(directions[1])):
+            if(directions[0] == 'r+'):
+                with open(directions[1], "r+") as file:
                     for line in file:
                         words = line.split()
                         num_lines += 1
@@ -164,7 +164,7 @@ def wc(**kwargs):
             answer = answer + "{} {} {} {}".format(num_lines, num_words,num_chars, directions[0])
             return answer
         else:
-            answer = answer +"{} is not a file".format(directions[0])
+            answer = answer +"{} is not a file".format(directions[1])
             return answer
     else:
         answer = 'invalid argument'

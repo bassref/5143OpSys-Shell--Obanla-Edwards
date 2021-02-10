@@ -13,6 +13,7 @@ def grep(**kwargs):
     files = parameter[1:]
     allLines = []
     answer = ""
+    
     if(len(parameter) >= 2 and tag == False):
         keyword = parameter[0]
         for f in files:
@@ -133,11 +134,36 @@ def grep(**kwargs):
         else:
             answer = "\n".join(listlines)
             return answer
-
-                
-
-
-
+    elif(len(flag) == 0 and len(parameter) == 1 and len(directions) == 2):
+        
+        listlines = []
+        keyword = parameter[0]
+       
+        if(os.path.isfile(directions[1])):
+            if(directions[0] == 'r+'):
+                with open(directions[1], "r+") as fil:
+                    for lines in fil:
+                        if(keyword in lines):
+                            lisj = []
+                            lines = lines.strip('\n')
+                            spliedline = lines.split()
+                            for i in range(0, len(spliedline)):
+                                if(spliedline[i] == keyword):
+                                    A = spliedline[i]
+                                    s = "\033[91m {}\033[00m" .format(A)
+                                    lisj.append(s)
+                                else:
+                                    lisj.append(spliedline[i])
+                            lines = " ".join(lisj)
+                            listlines.append(lines)
+            for item in listlines:
+                answer = answer + item
+                answer = answer +"\n"  
+            return answer
+        else:
+            answer = answer +"{} is not a file".format(directions[1])
+            return answer
+        
     else:
         answer = "invalid command"
         return answer

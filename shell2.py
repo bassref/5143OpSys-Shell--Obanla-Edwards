@@ -123,18 +123,15 @@ class CommandHelper(object):
                         elif vals == '<':
 
                             vals = "r+"
-                            readT = True
-                            directions.append(args[i-1])
-
-                            indexArray.append(args[i-1])
+                            
 
                         directions.append(vals)
 
                         indexArray.append(vals)
-                        if readT == False:
-                            directions.append(args[i+1])
+                        
+                        directions.append(args[i+1])
 
-                            indexArray.append(args[i+1])
+                        indexArray.append(args[i+1])
 
                     else:
                         
