@@ -1,0 +1,10 @@
+    """   
+    NAME
+        mv
+    SYNOPSIS
+        mv file(s)
+    DESCRIPTION
+       
+       	move or rename file1 to file2
+    EXAMPLES
+       mv file1 file2 - file1 file2	move or rename file1 to file2

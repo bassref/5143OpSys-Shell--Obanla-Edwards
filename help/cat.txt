@@ -1,0 +1,10 @@
+    """   
+    NAME
+        	file	display a file
+    SYNOPSIS
+        cat file(s)
+    DESCRIPTION
+       
+      file1,file2,fileN	display each of the files as if they were concatenated
+    EXAMPLES
+       cat file1 file2 	concatenate file1 and file2 and display to screen
