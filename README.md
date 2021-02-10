@@ -14,7 +14,8 @@ This is a project written in python that implements a basic shell .
 #### Instructions
 Only give instructions for the general running of your shell and anything you feel is pertinent
 
-- To run `ls` ...
+- To run `ls ah`write ls -a -h
+-  To run `ls lh` write ls -l -h...
 
 ***Commands***:
 
@@ -37,8 +38,13 @@ Only give instructions for the general running of your shell and anything you fe
 |  rmdir  |  remove a directory| Esther|      |
 |  who    |  list users currently logged in|Esther|       |
 |  chmod  |  change modify permission|Esther|         |
-
+| less    |   display a file a page at a time |Ester      |         |
 
 
 
 ***Non Working Components***
+
+
+
+***References***
+- =https://www.geeksforgeeks.org/clear-screen-python/
