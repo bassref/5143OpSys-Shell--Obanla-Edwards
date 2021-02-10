@@ -106,7 +106,7 @@ def grep(**kwargs):
         keyword = parameter[0]
         tolook = parameter[1:]
         count =0
-        print("after split",tolook)
+       
         listlines = []
         for lines in tolook:
             if(keyword in lines):

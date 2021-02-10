@@ -15,6 +15,9 @@ import numpy as np
 import getch as gt
 
 from time import sleep
+
+import concurrent.futures
+
 import re
 
 
@@ -88,6 +91,8 @@ class CommandHelper(object):
 
         tag = kwargs['tag']
 
+        thread =True
+
         indexArray = []
 
         readT = False
@@ -140,11 +145,11 @@ class CommandHelper(object):
 
         if (tag == True):
 
-            return self.invoke(cmd=cmd, flags=flags, params=params, directions=directions, tag=tag)
+            return self.invoke(cmd=cmd, flags=flags, params=params, directions=directions,tag=tag)
 
         else:
            
-            return self.invoke(cmd=cmd, flags=flags, params=params, directions=directions)
+            return self.invoke(cmd=cmd, flags=flags, params=params, directions=directions,thread =thread)
 
     def invoke(self, **kwargs):
 
@@ -155,6 +160,7 @@ class CommandHelper(object):
         else:
 
             cmd = ''
+            kwargs['cmd'] = cmd
 
         if 'params' in kwargs:
 
@@ -163,6 +169,7 @@ class CommandHelper(object):
         else:
 
             params = []
+            kwargs['params'] = params
 
         if 'flags' in kwargs:
 
@@ -171,6 +178,7 @@ class CommandHelper(object):
         else:
 
             flags = []
+            kwargs['flags'] =  flags 
 
         if 'directions' in kwargs:
 
@@ -179,6 +187,7 @@ class CommandHelper(object):
         else:
 
             directions = []
+            kwargs['directions'] = directions
 
         if 'tag' in kwargs:
 
@@ -187,6 +196,7 @@ class CommandHelper(object):
         else:
 
             tag = False
+            kwargs['tag'] = tag
 
         if 'thread' in kwargs:
 
@@ -205,18 +215,14 @@ class CommandHelper(object):
             return answer
 
         else:
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                future = executor.submit(self.commands[cmd],**kwargs )
+                answer = future.result()
+            return answer
 
-            if len(params) > 0:
+           
 
-                c = threading.Thread( target=self.commands[cmd], args=tuple(kwargs))
-
-            else:
-
-                c = threading.Thread(target=self.commands[cmd])
-
-            c.start()
-
-            c.join()
+            
 
     def exists(self, cmd):
 
