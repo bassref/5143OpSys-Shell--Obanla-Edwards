@@ -20,23 +20,23 @@ Only give instructions for the general running of your shell and anything you fe
 
 | command |    description    | Author | Notes      |
 | :-----: | :---------------: | :----: | :---: |
-|   ls    | directory listing | kehinde |       |
-|   pwd   | working directory |  kehinde   |       |
-|  mkdir  |  make a directory |  kehinde  |       |
-|  cd     |  change to a named directory|kehinde|      |
-|  wc     |  count number of lines/words/characters in file|kehinde|      |
-|  grep   |	search a file(s) files for keywords and print lines where pattern is found|kehinde|     |
-|  rm     |  remove a file|kehinde|       |        |
-|  cp     |  copy file1 and call it file2|kehinde|           |
-|  !x     |  this loads command x from your history so you can run it again|kehinde|        |
-|  history|  show a history of all your commands|kehinde|         |
-|  mv     |  move or rename file1 to file2| easter|       |
-|  head   |  display the first few lines of a file|easter |       |
-|  tail   |  display the last few lines of a file| easter |        |
-|  cat    |  display a file| easter|       |
-|  rmdir  |  remove a directory| easter|      |
-|  who    |  list users currently logged in|easter|       |
-|  chmod  |  change modify permission|easter|         |
+|   ls    | directory listing | Kehinde |       |
+|   pwd   | working directory |  Kehinde   |       |
+|  mkdir  |  make a directory |  Kehinde  |       |
+|  cd     |  change to a named directory|Kehinde|      |
+|  wc     |  count number of lines/words/characters in file|Kehinde|      |
+|  grep   |	search a file(s) files for keywords and print lines where pattern is found|Kehinde|     |
+|  rm     |  remove a file|Kehinde|       |        |
+|  cp     |  copy file1 and call it file2|Kehinde|           |
+|  !x     |  this loads command x from your history so you can run it again|Kehinde|        |
+|  history|  show a history of all your commands|Kehinde|         |
+|  mv     |  move or rename file1 to file2| Easter|       |
+|  head   |  display the first few lines of a file|Easter |       |
+|  tail   |  display the last few lines of a file| Easter |        |
+|  cat    |  display a file| Easter|       |
+|  rmdir  |  remove a directory| Easter|      |
+|  who    |  list users currently logged in|Easter|       |
+|  chmod  |  change modify permission|Easter|         |
 
 
 
