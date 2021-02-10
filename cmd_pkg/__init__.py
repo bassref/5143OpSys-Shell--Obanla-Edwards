@@ -18,3 +18,4 @@ from cmd_pkg.head import head
 from cmd_pkg.who import who
 from cmd_pkg.sort import sort
 from cmd_pkg.chmod import chmod
+from cmd_pkg.less import less
