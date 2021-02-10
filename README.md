@@ -38,7 +38,7 @@ Only give instructions for the general running of your shell and anything you fe
 |  rmdir  |  remove a directory| Esther|      |
 |  who    |  list users currently logged in|Esther|       |
 |  chmod  |  change modify permission|Esther|         |
-| less    |   display a file a page at a time |Ester      |         |
+| less    |   display a file a page at a time |Esther      |         |
 
 
 
