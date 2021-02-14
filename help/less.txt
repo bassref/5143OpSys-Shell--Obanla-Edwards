@@ -1,0 +1,12 @@
+    """   
+    NAME
+        less	display a file a page at a time
+    SYNOPSIS
+        less	 [filename]
+    DESCRIPTION
+        less	file	display a file a page at a time
+        
+    EXAMPLES
+       less test
+        Display page of test depending on terminal size
+    """
