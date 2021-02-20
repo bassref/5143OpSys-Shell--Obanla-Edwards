@@ -21,6 +21,7 @@ import concurrent.futures
 import re
 
 
+
 class CommandHelper(object):
 
     def __init__(self):
@@ -229,7 +230,7 @@ class CommandHelper(object):
 
         return cmd in self.commands
 
-
+    
 
 
     #splits the command if it has a pipe 
@@ -245,6 +246,7 @@ class CommandHelper(object):
 
         cmdTest = cmd.split()[0]
         if  cmd == 'exit':
+            
             sys.exit()
 
         if '!' in cmdTest:

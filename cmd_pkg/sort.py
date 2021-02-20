@@ -18,7 +18,7 @@ def sort(**kwargs):
         if tag == False:
             with open(parameter[0], "r+") as f:
                 line = f.read().splitlines()
-            line.sort()
+                line.sort()
         else:
             line = parameter
             line.sort()
@@ -39,7 +39,7 @@ def sort(**kwargs):
             if(directions[0] == 'r+'):
                 with open(directions[1], "r+") as f:
                     line = f.read().splitlines()
-                line.sort()
+                    line.sort()
                 for x in line:
                     answer = answer + x
                     answer = answer + '\n'
